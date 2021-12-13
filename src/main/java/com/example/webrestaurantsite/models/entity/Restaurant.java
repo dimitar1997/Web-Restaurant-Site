@@ -1,6 +1,8 @@
 package com.example.webrestaurantsite.models.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -8,11 +10,21 @@ import java.util.List;
 public class Restaurant extends BasicEntity {
 
     private String name;
-    private List<Picture> pictures;
-    private Town town;
     private String description;
     private String address;
     private User owner;
+    private int seats;
+
+
+    @NotNull
+    public int getSeats() {
+        return seats;
+    }
+
+    public Restaurant setSeats(int seats) {
+        this.seats = seats;
+        return this;
+    }
 
     @Column(nullable = false)
     public String getName() {
@@ -24,25 +36,6 @@ public class Restaurant extends BasicEntity {
         return this;
     }
 
-    @OneToMany
-    public List<Picture> getPictures() {
-        return pictures;
-    }
-
-    public Restaurant setPictures(List<Picture> pictures) {
-        this.pictures = pictures;
-        return this;
-    }
-
-    @ManyToOne
-    public Town getTown() {
-        return town;
-    }
-
-    public Restaurant setTown(Town town) {
-        this.town = town;
-        return this;
-    }
 
     @Column(columnDefinition = "TEXT")
     public String getDescription() {

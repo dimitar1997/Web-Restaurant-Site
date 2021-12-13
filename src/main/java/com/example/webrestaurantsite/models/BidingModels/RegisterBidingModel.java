@@ -1,45 +1,48 @@
-package com.example.webrestaurantsite.models.entity;
+package com.example.webrestaurantsite.models.BidingModels;
 
-import com.example.webrestaurantsite.models.entity.enums.RoleEnums;
-
-import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Entity
-@Table(name = "users")
-public class User extends BasicEntity {
+
+public class RegisterBidingModel {
     private String name;
     private String middleName;
     private String finalName;
     private String email;
     private String username;
     private String password;
-    private RoleEnums role;
+    private String confirmPassword;
+    private String role;
 
-
-    public User() {
+    public RegisterBidingModel() {
     }
 
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public RegisterBidingModel setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+        return this;
+    }
 
     @NotNull
-    @Column(unique = true)
     public String getName() {
         return name;
     }
 
-    public User setName(String name) {
+    public RegisterBidingModel setName(String name) {
         this.name = name;
         return this;
     }
 
-    @Column
     public String getMiddleName() {
         return middleName;
     }
 
-    public User setMiddleName(String middleName) {
+    public RegisterBidingModel setMiddleName(String middleName) {
         this.middleName = middleName;
         return this;
     }
@@ -49,51 +52,49 @@ public class User extends BasicEntity {
         return finalName;
     }
 
-    public User setFinalName(String finalName) {
+    public RegisterBidingModel setFinalName(String finalName) {
         this.finalName = finalName;
         return this;
     }
 
+    @NotBlank
     @Email
     public String getEmail() {
         return email;
     }
 
-    public User setEmail(String email) {
+    public RegisterBidingModel setEmail(String email) {
         this.email = email;
         return this;
     }
 
-    @NotNull
-    @Size(min = 5)
-    @Column(nullable = false)
+    @NotBlank
+    @Size(min = 5, max = 20)
     public String getUsername() {
         return username;
     }
 
-    public User setUsername(String username) {
+    public RegisterBidingModel setUsername(String username) {
         this.username = username;
         return this;
     }
 
-    @NotNull
+    @NotBlank
     @Size(min = 6, max = 20)
-    @Column(nullable = false)
     public String getPassword() {
         return password;
     }
 
-    public User setPassword(String password) {
+    public RegisterBidingModel setPassword(String password) {
         this.password = password;
         return this;
     }
 
-    @Enumerated(EnumType.STRING)
-    public RoleEnums getRole() {
+    public String getRole() {
         return role;
     }
 
-    public User setRole(RoleEnums role) {
+    public RegisterBidingModel setRole(String role) {
         this.role = role;
         return this;
     }
