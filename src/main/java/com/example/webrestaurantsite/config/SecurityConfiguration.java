@@ -22,7 +22,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .antMatchers("/", "/users/login", "users/register").permitAll()
+                .antMatchers("/", "/users/login", "/users/register").permitAll()
                 .antMatchers("/reservation/my-reservations").authenticated()
                 .antMatchers("/restaurant/add").hasRole(RoleEnums.OWNER.name())
                 .and()
@@ -31,7 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .usernameParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY)
                 .passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY)
                 .defaultSuccessUrl("/")
-                .failureForwardUrl("users/login-error")
+                .failureForwardUrl("/users/login-error")
                 .and()
                 .logout()
                 .logoutUrl("users/logout")

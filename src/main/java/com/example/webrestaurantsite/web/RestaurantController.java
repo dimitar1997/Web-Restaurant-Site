@@ -25,7 +25,7 @@ private final RestaurantService restaurantService;
     }
 
 
-    @GetMapping("/{restaurantId}/details")
+    @GetMapping("/details/{restaurantId}")
     public String detailsRestaurant(@PathVariable Long restaurantId,
                                     Model model) {
         RestaurantViewDetailsModel restaurantViewDetailsModel = restaurantService.details(restaurantId);
@@ -50,7 +50,7 @@ private final RestaurantService restaurantService;
         restaurantService.addRestaurant(addRestaurantBidingModel, currentUser);
         return "redirect:/";
     }
-    @DeleteMapping("/{id}/delete")
+    @DeleteMapping("/delete/{id}")
     @PreAuthorize("@restaurantServiceImpl.isOwner(#principal.name, #id)")
     public String deleteRestaurant(@PathVariable Long id, Principal principal){
         restaurantService.delete(id);

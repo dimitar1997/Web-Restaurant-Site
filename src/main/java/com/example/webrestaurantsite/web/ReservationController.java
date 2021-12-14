@@ -34,7 +34,7 @@ public class ReservationController {
         return "my-reservations";
     }
 
-    @PostMapping("/{restaurantId}/booked")
+    @PostMapping("/booked/{restaurantId}")
     public String bookDate(@PathVariable Long restaurantId, @Valid ReserveBidingModel reserveBidingModel,
                            BindingResult bindingResult, RedirectAttributes redirectAttributes,
                            @AuthenticationPrincipal UserDetailsImpl currentUser) {
