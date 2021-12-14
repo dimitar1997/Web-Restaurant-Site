@@ -1,6 +1,6 @@
 package com.example.webrestaurantsite.service.impl;
 
-import com.example.webrestaurantsite.models.entity.Restaurant;
+
 import com.example.webrestaurantsite.models.entity.Town;
 import com.example.webrestaurantsite.repository.RestaurantRepository;
 import com.example.webrestaurantsite.repository.TownRepository;
@@ -19,13 +19,8 @@ public class TownServiceImpl implements TownService {
 
 
     @Override
-    public void add(String townName, UserDetailsImpl currentUser) {
-        Restaurant restaurant = restaurantRepository.findByOwnerUsername(currentUser.getUserIdentifier());
-        Town town = townRepository.findByName(townName);
-        if (town == null) {
+    public void add(String townName) {
             Town newTown = new Town().setName(townName);
-        } else {
-            restaurant.setTown(town);
-        }
+            townRepository.save(newTown);
     }
 }

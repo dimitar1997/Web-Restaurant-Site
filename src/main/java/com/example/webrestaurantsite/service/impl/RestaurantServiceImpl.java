@@ -2,11 +2,15 @@ package com.example.webrestaurantsite.service.impl;
 
 import com.example.webrestaurantsite.models.BidingModels.AddRestaurantBidingModel;
 import com.example.webrestaurantsite.models.entity.Restaurant;
+import com.example.webrestaurantsite.models.entity.Town;
 import com.example.webrestaurantsite.models.entity.User;
+import com.example.webrestaurantsite.models.service.AddRestaurantServiceModel;
 import com.example.webrestaurantsite.models.view.RestaurantViewDetailsModel;
 import com.example.webrestaurantsite.repository.RestaurantRepository;
+import com.example.webrestaurantsite.repository.TownRepository;
 import com.example.webrestaurantsite.repository.UserRepository;
 import com.example.webrestaurantsite.service.RestaurantService;
+import com.example.webrestaurantsite.service.TownService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -15,13 +19,16 @@ public class RestaurantServiceImpl implements RestaurantService {
     private final RestaurantRepository restaurantRepository;
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
+    private final TownRepository townRepository;
+    private final TownService townService;
 
-    public RestaurantServiceImpl(RestaurantRepository restaurantRepository, UserRepository userRepository,ModelMapper modelMapper) {
+    public RestaurantServiceImpl(RestaurantRepository restaurantRepository, UserRepository userRepository, ModelMapper modelMapper, TownRepository townRepository, TownService townService) {
         this.restaurantRepository = restaurantRepository;
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
+        this.townRepository = townRepository;
+        this.townService = townService;
     }
-
 
 
     @Override
@@ -32,9 +39,17 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public void addRestaurant(AddRestaurantBidingModel addRestaurantBidingModel, UserDetailsImpl currentUser) {
-        Restaurant restaurant = modelMapper.map(addRestaurantBidingModel, Restaurant.class);
+        AddRestaurantServiceModel addRestaurantServiceModel = modelMapper.map(addRestaurantBidingModel, AddRestaurantServiceModel.class);
+        Restaurant restaurant = modelMapper.map(addRestaurantServiceModel, Restaurant.class);
         User owner = userRepository.findByUsername(currentUser.getUserIdentifier());
         restaurant.setOwner(owner);
+        Town town = townRepository.findByName(addRestaurantServiceModel.getTown());
+        if (town == null) {
+            townService.add(addRestaurantServiceModel.getName());
+        } else {
+            restaurant.setTown(town);
+        }
+
         restaurantRepository.save(restaurant);
     }
 }

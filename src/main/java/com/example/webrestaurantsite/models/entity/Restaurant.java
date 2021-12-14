@@ -17,6 +17,7 @@ public class Restaurant extends BasicEntity {
     private Town town;
 
     @ManyToOne
+    @NotNull
     public Town getTown() {
         return town;
     }

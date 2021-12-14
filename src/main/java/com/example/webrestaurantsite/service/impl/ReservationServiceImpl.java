@@ -3,6 +3,7 @@ package com.example.webrestaurantsite.service.impl;
 import com.example.webrestaurantsite.models.BidingModels.ReserveBidingModel;
 import com.example.webrestaurantsite.models.entity.Reservation;
 import com.example.webrestaurantsite.models.entity.Restaurant;
+import com.example.webrestaurantsite.models.service.ReserveServiceModel;
 import com.example.webrestaurantsite.repository.ReservationRepository;
 import com.example.webrestaurantsite.repository.RestaurantRepository;
 import com.example.webrestaurantsite.repository.UserRepository;
@@ -33,8 +34,9 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public void makeReserve(Long restaurantId, UserDetailsImpl currentUser, ReserveBidingModel reserveBidingModel) {
+        ReserveServiceModel reserveServiceModel = modelMapper.map(reserveBidingModel, ReserveServiceModel.class);
         Reservation reservation = new Reservation();
-        reservation.setDateTime(reserveBidingModel.getDateTime());
+        reservation.setDateTime(reserveServiceModel.getDateTime());
         reservation.setRestaurant(restaurantRepository.getById(restaurantId));
         reservation.setUser(userRepository.findByUsername(currentUser.getUserIdentifier()));
         reservationRepository.save(reservation);

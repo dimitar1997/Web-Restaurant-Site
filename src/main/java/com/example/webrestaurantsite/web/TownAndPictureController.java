@@ -1,8 +1,6 @@
 package com.example.webrestaurantsite.web;
 
 import com.example.webrestaurantsite.service.TownService;
-import com.example.webrestaurantsite.service.impl.UserDetailsImpl;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,8 +20,8 @@ public class TownAndPictureController {
         return "add-town";
     }
     @PostMapping("/add-town")
-    public  String addTown(String townName, @AuthenticationPrincipal UserDetailsImpl currentUser){
-        townService.add(townName, currentUser);
+    public  String addTown(String townName){
+        townService.add(townName);
         return "add-picture";
     }
 

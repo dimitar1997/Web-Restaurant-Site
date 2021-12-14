@@ -2,6 +2,7 @@ package com.example.webrestaurantsite.service.impl;
 
 import com.example.webrestaurantsite.models.BidingModels.RegisterBidingModel;
 import com.example.webrestaurantsite.models.entity.User;
+import com.example.webrestaurantsite.models.service.RegisterServiceModel;
 import com.example.webrestaurantsite.repository.UserRepository;
 import com.example.webrestaurantsite.service.UserService;
 import org.modelmapper.ModelMapper;
@@ -20,6 +21,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUser(RegisterBidingModel registerBidingModel) {
-User user = modelMapper.map(registerBidingModel, User.class);
+        RegisterServiceModel registerServiceModel = modelMapper.map(registerBidingModel, RegisterServiceModel.class);
+        User user = modelMapper.map(registerServiceModel, User.class);
+        userRepository.save(user);
     }
 }

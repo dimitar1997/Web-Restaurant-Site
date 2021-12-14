@@ -1,12 +1,11 @@
-package com.example.webrestaurantsite.models.BidingModels;
+package com.example.webrestaurantsite.models.service;
 
-import com.example.webrestaurantsite.models.entity.Town;
 import com.example.webrestaurantsite.models.entity.User;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
-public class AddRestaurantBidingModel {
+public class AddRestaurantServiceModel {
     private String name;
     private String description;
     private String address;
@@ -15,22 +14,21 @@ public class AddRestaurantBidingModel {
     private String town;
 
 
-    @NotNull
     public String getTown() {
         return town;
     }
 
-    public AddRestaurantBidingModel setTown(String town) {
+    public AddRestaurantServiceModel setTown(String town) {
         this.town = town;
         return this;
     }
 
-    @NotNull
+
     public String getName() {
         return name;
     }
 
-    public AddRestaurantBidingModel setName(String name) {
+    public AddRestaurantServiceModel setName(String name) {
         this.name = name;
         return this;
     }
@@ -39,37 +37,36 @@ public class AddRestaurantBidingModel {
         return description;
     }
 
-    public AddRestaurantBidingModel setDescription(String description) {
+    public AddRestaurantServiceModel setDescription(String description) {
         this.description = description;
         return this;
     }
 
-    @NotNull
+
     public String getAddress() {
         return address;
     }
 
-    public AddRestaurantBidingModel setAddress(String address) {
+    public AddRestaurantServiceModel setAddress(String address) {
         this.address = address;
         return this;
     }
 
-    @NotNull
+
     public User getOwner() {
         return owner;
     }
 
-    public AddRestaurantBidingModel setOwner(User owner) {
+    public AddRestaurantServiceModel setOwner(User owner) {
         this.owner = owner;
         return this;
     }
 
-    @Positive
     public int getSeats() {
         return seats;
     }
 
-    public AddRestaurantBidingModel setSeats(int seats) {
+    public AddRestaurantServiceModel setSeats(int seats) {
         this.seats = seats;
         return this;
     }
