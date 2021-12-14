@@ -2,7 +2,6 @@ package com.example.webrestaurantsite.web;
 
 import com.example.webrestaurantsite.models.BidingModels.RegisterBidingModel;
 import com.example.webrestaurantsite.service.UserService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +27,8 @@ public class UserRegisterController {
                                 BindingResult bindingResult, RedirectAttributes redirectAttributes){
         if (bindingResult.hasErrors() || !registerBidingModel.getPassword().equals(registerBidingModel.getConfirmPassword())){
             redirectAttributes.addFlashAttribute("registerBidingModel", registerBidingModel)
-                    .addFlashAttribute("org.springframework.validation.BindingResult.registerBidingModel", registerBidingModel);
-            return "redirect/users/register";
+                    .addFlashAttribute("org.springframework.validation.BindingResult.registerBidingModel", bindingResult);
+            return "redirect:/users/register";
         }
         userService.addUser(registerBidingModel);
         return "redirect:/";

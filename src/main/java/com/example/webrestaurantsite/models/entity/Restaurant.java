@@ -14,7 +14,17 @@ public class Restaurant extends BasicEntity {
     private String address;
     private User owner;
     private int seats;
+    private Town town;
 
+    @ManyToOne
+    public Town getTown() {
+        return town;
+    }
+
+    public Restaurant setTown(Town town) {
+        this.town = town;
+        return this;
+    }
 
     @NotNull
     public int getSeats() {
