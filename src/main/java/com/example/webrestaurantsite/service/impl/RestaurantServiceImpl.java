@@ -14,6 +14,8 @@ import com.example.webrestaurantsite.service.TownService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
     private final RestaurantRepository restaurantRepository;
@@ -51,5 +53,19 @@ public class RestaurantServiceImpl implements RestaurantService {
         }
 
         restaurantRepository.save(restaurant);
+    }
+
+    @Override
+    public void delete(Long id) {
+        restaurantRepository.deleteById(id);
+    }
+
+    public boolean isOwner(String userName, Long id) {
+        User user = userRepository.findByUsername(userName);
+        Restaurant restaurant = restaurantRepository.getById(id);
+        if (user.getUsername().equals(restaurant.getOwner().getUsername())) {
+            return true;
+        }
+        return false;
     }
 }

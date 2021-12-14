@@ -1,5 +1,6 @@
 package com.example.webrestaurantsite.config;
 
+import com.example.webrestaurantsite.models.entity.enums.RoleEnums;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -22,7 +23,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .antMatchers("/", "/users/login", "users/register").permitAll()
-                .antMatchers("/**").authenticated()
+                .antMatchers("/reservation/my-reservations").authenticated()
+                .antMatchers("/restaurant/add").hasRole(RoleEnums.OWNER.name())
                 .and()
                 .formLogin()
                 .loginPage("/users/login")

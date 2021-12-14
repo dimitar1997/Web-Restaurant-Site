@@ -4,17 +4,16 @@ import com.example.webrestaurantsite.models.BidingModels.AddRestaurantBidingMode
 import com.example.webrestaurantsite.models.view.RestaurantViewDetailsModel;
 import com.example.webrestaurantsite.service.RestaurantService;
 import com.example.webrestaurantsite.service.impl.UserDetailsImpl;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/restaurant")
@@ -50,6 +49,12 @@ private final RestaurantService restaurantService;
         }
         restaurantService.addRestaurant(addRestaurantBidingModel, currentUser);
         return "redirect:/";
+    }
+    @DeleteMapping("/{id}/delete")
+    @PreAuthorize("@restaurantServiceImpl.isOwner(#principal.name, #id)")
+    public String deleteRestaurant(@PathVariable Long id, Principal principal){
+        restaurantService.delete(id);
+        return  "redirect:/";
     }
 
 }

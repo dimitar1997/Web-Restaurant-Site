@@ -8,4 +8,6 @@ public interface RestaurantService {
     RestaurantViewDetailsModel details(Long restaurantId);
 
     void addRestaurant(AddRestaurantBidingModel addRestaurantBidingModel, UserDetailsImpl currentUser);
+
+    void delete(Long id);
 }
