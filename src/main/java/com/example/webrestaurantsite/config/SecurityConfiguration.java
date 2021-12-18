@@ -2,13 +2,17 @@ package com.example.webrestaurantsite.config;
 
 import com.example.webrestaurantsite.models.entity.enums.RoleEnums;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+@Configuration
+@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
@@ -22,8 +26,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                .antMatchers("/reservation/my-reservations", "users/logout").authenticated()
                 .antMatchers("/", "/users/login", "/users/register").permitAll()
-                .antMatchers("/reservation/my-reservations").authenticated()
                 .antMatchers("/restaurant/add").hasRole(RoleEnums.OWNER.name())
                 .and()
                 .formLogin()
@@ -38,6 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/")
                 .invalidateHttpSession(true);
     }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 

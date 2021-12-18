@@ -26,7 +26,7 @@ public class ReservationController {
         this.reservationService = reservationService;
     }
 
-    @GetMapping("my-reservations")
+    @GetMapping("/my-reservations")
     public String currentUserReservations(@AuthenticationPrincipal UserDetailsImpl currentUser,
                                           Model model) {
         List<Reservation> allCurrentUserReservations = reservationService.allCurrentUserReservations(currentUser);
