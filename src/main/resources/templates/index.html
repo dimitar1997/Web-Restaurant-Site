@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments/head::head"></head>
 <header th:replace="fragments/navbar::header"/>
-<div>
+
+<body>
+<div class="center">
     <h1>Добре Дошли</h1>
     <div>С “Джумбаре” е по-лесно и забавно да резервирате желаната от вас маса в любимото Ви заведение.</div>
-    <div>
-        <button class="logout">Login</button>
-        <button class="logout">Register</button>
-    </div>
+        <li class="nav-item" sec:authorize="!isAuthenticated()">
+        <button class="index-button">Login</button>
+        <button class="index-button">Register</button>
+        </li>
 </div>
-<body>
 </body>
 </html>

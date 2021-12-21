@@ -8,8 +8,8 @@ body > .header {
     bottom: 100vh;
 }
 
-.header{
-    width:100%;
+.header {
+    width: 100%;
     background: black;
     display: flex;
     color: white;
@@ -18,22 +18,22 @@ body > .header {
     align-items: center;
 }
 
-.logo:hover{
+.logo:hover {
     cursor: pointer;
 }
 
-.right-side{
+.right-side {
     display: flex;
     gap: 25px;
     align-items: center;
     margin-right: 10px;
 }
 
-.left-side{
+.left-side {
     margin-left: 10px;
 }
 
-.logout{
+.index-button {
     border: none;
     height: 30px;
     padding-left: 10px;
@@ -42,27 +42,40 @@ body > .header {
     border-radius: 24px;
 }
 
-.nav-link{
-    color:white;
+.nav-link {
+    color: white;
     text-decoration: none;
 }
+
 .nav-link:hover {
     border-style: solid;
     border-width: 0px 0px 3px 0px;
     border-color: #FFD600;
-    color:white;
+    color: white;
 }
 
 .nav-link:visited {
     border-style: solid;
     border-width: 0px 0px 3px 0px;
     border-color: #FFD600;
-    color:white;
+    color: white;
 }
 
 .nav-link:active {
     border-style: solid;
     border-width: 0px 0px 3px 0px;
     border-color: #FFD600;
-    color:white;
+    color: white;
 }
+
+.center {
+    width: 500px;
+    height: 700px;
+    display: ruby-text-container;
+    align-items: center;
+    justify-content: center;
+    color: white;
+
+
+}
+
