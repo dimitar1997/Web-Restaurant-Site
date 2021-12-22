@@ -27,6 +27,7 @@ body > .header {
     gap: 25px;
     align-items: center;
     margin-right: 10px;
+    list-style-type: none;
 }
 
 .left-side {
@@ -35,11 +36,11 @@ body > .header {
 
 .index-button {
     border: none;
-    height: 30px;
-    padding-left: 10px;
-    padding-right: 10px;
+    height: 37px;
+    padding-left: 39px;
+    padding-right: 48px;
     background: #FFD600;
-    border-radius: 24px;
+    border-radius: 28px;
 }
 
 .nav-link {
@@ -68,14 +69,124 @@ body > .header {
     color: white;
 }
 
-.center {
-    width: 500px;
-    height: 700px;
-    display: ruby-text-container;
-    align-items: center;
-    justify-content: center;
-    color: white;
 
+.nav-link-login-user{
+    color: black;
+    text-decoration: none;
+    font-family: monospace !IMPORTANT;
+}
+.blur{
+    border: 1px solid blue;
+    filter: blur(23px);
+    background: #000000;
+    opacity: 0.4;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    /* z-index: 5; */
+    width: 45%;
+    height: 254px;
+    z-index: 4;
+    border-top-left-radius: 70px;
+    border-bottom-right-radius: 70px;
+}
+.banner-text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 5;
+    width: 45%;
+    padding: 40px 0;
+    text-align: center;
+    border-top-left-radius: 70px;
+    border-bottom-right-radius: 70px;
+    background-color: rgba(0,0,0,0.3);
+    color: #fff;
+    font-weight: bold;
+    border: 5px inset #fff;
+}
+
+.banner-text p{
+    padding: 0 1%;
+    font-family: sans-serif;
+}
+/* ________________________________________________*/
+ul{
+    list-style-type: none;
+}
+.container{
+    border:1px solid green;
+    width:80% !important;
+    height:100%;
+    margin:0 auto;
+    padding:0 !important;
+}
+.row{
+    border:1px solid blue;
+    width:100% !important;
+    height: 80px;
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+    margin-top: 5%;
+}
+.section{
+    width:33.3%;
+    height:100%;
+    display:inline-block;
+    border:1px solid yellow;
+}
+.titleForm{
+    color: white;
+    background-color: black;
+    border-radius: 8px;
+    width: 234px;
+    height: 37px;
+    padding: 0 20px;
+    font-size: 1.5rem;
+    margin-top: 2%;
+}
+
+input.field{
+    border:0px;
+    border-radius: 8px;
+    background-color:#fff;
+}
+select{
+    border:0px;
+    border-radius: 8px;
+    background-color:#fff;
+}
+.register-font{
+    color: beige;
+    font: icon;
+    font-weight: 600;
+}
+.center-down-register{
+    margin-left: 38%;
+    margin-top: 10%;
+}
+.index-button-register{
+    border: none;
+    height: 37px;
+    padding-left: 109px;
+    padding-right: 131px;
+    background: #FFD600;
+    border-radius: 28px;
 
 }
+.mandatory-field{
+    margin-left: 30%;
+    margin-top: auto;
+    margin-bottom: 3%;
+    font-family: fantasy;
+    color: brown;
+}
+}
+
+
+
+
+
 

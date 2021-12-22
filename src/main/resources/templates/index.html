@@ -7,12 +7,22 @@
 
 <body>
 <div class="center">
-    <h1>Добре Дошли</h1>
-    <div>С “Джумбаре” е по-лесно и забавно да резервирате желаната от вас маса в любимото Ви заведение.</div>
-        <li class="nav-item" sec:authorize="!isAuthenticated()">
-        <button class="index-button">Login</button>
-        <button class="index-button">Register</button>
-        </li>
+    <div class="blur"></div>
+    <div class="banner-text">
+        <h1>Добре Дошли</h1>
+        <p>С “Джумбаре” е по-лесно и забавно да резервирате желаната от вас маса в любимото Ви заведение.</p>
+        <ul>
+            <li class="nav-item" sec:authorize="!isAuthenticated()">
+                <button class="index-button">
+                    <a class="nav-link-login-user" th:href="@{/users/login}">Login</a>
+                </button>
+                <button class="index-button">
+                    <a class="nav-link-login-user" th:href="@{/users/register}">Register</a>
+                </button>
+            </li>
+        </ul>
+    </div>
+
 </div>
 </body>
 </html>

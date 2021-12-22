@@ -1,12 +1,77 @@
-
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<head th:replace="/fragments/head::head"></head>
+<header th:replace="/fragments/navbar::header"></header>
 <body>
 
+<div class="container">
+    <form>
+        <div class="row">
+            <h1 class="titleForm">Registration form</h1>
+            <div class="mandatory-field"> Полетата с * са задължителни</div>
+        </div>
+
+        <div class="row">
+            <div class="section">
+                <label class="register-font">First name*</label><br>
+                <input type="text" class="field" min="3">
+            </div>
+            <div class="section">
+                <label class="register-font">Middle name</label><br>
+                <input type="text" class="field">
+            </div>
+            <div class="section">
+                <label class="register-font" >Last name*</label><br>
+                <input type="text" class="field">
+            </div>
+        </div>
+        <div class="row">
+            <div class="section">
+                <label class="register-font">Username*</label><br>
+                <input type="text" class="field" min="5" max="20">
+            </div>
+            <div class="section">
+                <label class="register-font">Email*</label><br>
+                <input type="text" class="field">
+            </div>
+        </div>
+        <div class="row">
+            <h1 class="titleForm">Security Details</h1>
+        </div>
+        <div class="row">
+            <div class="section">
+                <label class="register-font">Password*</label><br>
+                <input type="text" class="field" min="5" max="20">
+            </div>
+            <div class="section">
+                <label class="register-font">Confirm Password</label><br>
+                <input type="text" class="field">
+            </div>
+        </div>
+        <div class="section">
+            <label class="register-font" >Role</label><br>
+            <select th:erorrclass="is-invalid" id="role" name="role"
+                    aria-describedby="categoryHelpInline">
+                <option value="" selected>Assign Role</option>
+                <option th:each="c : ${T(com.example.webrestaurantsite.models.entity.enums.RoleEnums).values()}"
+                        th:value="${c}" th:text="${c}">BATTLE
+                </option>
+
+            </select>
+            <small id="categoryHelpInline" class="invalid-feedback bg-danger text-light rounded">
+                Трябва да изберете роля.
+            </small>
+        </div>
+        <div class="center-down-register">
+            <button class="index-button-register">
+                <a class="nav-link-login-user" th:href="@{/users/register}">Register</a>
+            </button>
+        </div>
+
+    </form>
+</div>
+
 </body>
+
 </html>
