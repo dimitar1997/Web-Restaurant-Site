@@ -27,7 +27,7 @@ public class WebRestaurantImpl implements UserDetailsService {
 
     private static UserDetails mapToUserDetails(User user) {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().name()));
+        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));
         return new UserDetailsImpl(user.getUsername(),
                 user.getPassword(), grantedAuthorities);
     }
