@@ -1,5 +1,8 @@
 package com.example.webrestaurantsite.models.BidingModels;
 
+import com.example.webrestaurantsite.models.entity.enums.RoleEnums;
+
+import javax.persistence.Enumerated;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -7,14 +10,14 @@ import javax.validation.constraints.Size;
 
 
 public class RegisterBidingModel {
-    private String name;
+    private String firstName;
     private String middleName;
-    private String finalName;
+    private String lastName;
     private String email;
     private String username;
     private String password;
     private String confirmPassword;
-    private String role;
+    private RoleEnums role;
 
     public RegisterBidingModel() {
     }
@@ -29,12 +32,12 @@ public class RegisterBidingModel {
     }
 
     @NotNull
-    public String getName() {
-        return name;
+    public String firstName() {
+        return firstName;
     }
 
-    public RegisterBidingModel setName(String name) {
-        this.name = name;
+    public RegisterBidingModel firstName(String firstName) {
+        this.firstName = firstName;
         return this;
     }
 
@@ -48,12 +51,12 @@ public class RegisterBidingModel {
     }
 
     @NotNull
-    public String getFinalName() {
-        return finalName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public RegisterBidingModel setFinalName(String finalName) {
-        this.finalName = finalName;
+    public RegisterBidingModel setLastName(String lastName) {
+        this.lastName = lastName;
         return this;
     }
 
@@ -69,7 +72,7 @@ public class RegisterBidingModel {
     }
 
     @NotBlank
-    @Size(min = 5, max = 20)
+    @Size(min = 4, max = 20)
     public String getUsername() {
         return username;
     }
@@ -80,7 +83,7 @@ public class RegisterBidingModel {
     }
 
     @NotBlank
-    @Size(min = 6, max = 20)
+    @Size(min = 5, max = 20)
     public String getPassword() {
         return password;
     }
@@ -90,11 +93,21 @@ public class RegisterBidingModel {
         return this;
     }
 
-    public String getRole() {
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public RegisterBidingModel setFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+
+    public RoleEnums getRole() {
         return role;
     }
 
-    public RegisterBidingModel setRole(String role) {
+    public RegisterBidingModel setRole(RoleEnums role) {
         this.role = role;
         return this;
     }

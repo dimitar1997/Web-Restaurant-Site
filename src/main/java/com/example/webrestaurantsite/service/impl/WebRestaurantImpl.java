@@ -7,10 +7,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Service
 public class WebRestaurantImpl implements UserDetailsService {
     private final UserRepository userRepository;
 
@@ -26,7 +27,7 @@ public class WebRestaurantImpl implements UserDetailsService {
 
     private static UserDetails mapToUserDetails(User user) {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_" + "USER"));
+        grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().name()));
         return new UserDetailsImpl(user.getUsername(),
                 user.getPassword(), grantedAuthorities);
     }

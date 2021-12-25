@@ -22,7 +22,7 @@ public class UserRegisterController {
     public String register() {
         return "register";
     }
-    @PostMapping("/error-register")
+    @PostMapping("/register")
     public String errorRegister(@Valid RegisterBidingModel registerBidingModel,
                                 BindingResult bindingResult, RedirectAttributes redirectAttributes){
         if (bindingResult.hasErrors() || !registerBidingModel.getPassword().equals(registerBidingModel.getConfirmPassword())){
@@ -31,6 +31,10 @@ public class UserRegisterController {
             return "redirect:/users/register";
         }
         userService.addUser(registerBidingModel);
-        return "redirect:/";
+        return "redirect:/users/login";
+    }
+    @ModelAttribute("registerBidingModel")
+    public RegisterBidingModel registerBidingModel(){
+        return new RegisterBidingModel();
     }
 }

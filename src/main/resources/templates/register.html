@@ -6,7 +6,10 @@
 <body>
 
 <div class="container">
-    <form>
+    <!-- <div class="blur-register"></div> -->
+    <form th:action="@{/users/register}"
+          th:method="post"
+          th:object="${registerBidingModel}">
         <div class="row">
             <h1 class="titleForm">Registration form</h1>
             <div class="mandatory-field"> Полетата с * са задължителни</div>
@@ -14,26 +17,48 @@
 
         <div class="row">
             <div class="section">
-                <label class="register-font">First name*</label><br>
-                <input type="text" class="field" min="3">
+                <label for="firstName" class="register-font">First Name*</label><br>
+                <input class="field"
+                        id="firstName"
+                        th:field="*{firstName}"
+                        type="text"
+                placeholder="First Name">
             </div>
             <div class="section">
-                <label class="register-font">Middle name</label><br>
-                <input type="text" class="field">
+                <label for="middleName" class="register-font">Middle Name</label><br>
+                <input class="field"
+                       id="middleName"
+                       th:field="*{middleName}"
+                       type="text"
+                       placeholder="Middle Name">
             </div>
             <div class="section">
-                <label class="register-font" >Last name*</label><br>
-                <input type="text" class="field">
+                <label for="lastName" class="register-font">Last Name*</label><br>
+                <input  class="field"
+                        id="lastName"
+                        th:field="*{lastName}"
+                        type="text"
+                        placeholder="Last Name">
             </div>
         </div>
         <div class="row">
             <div class="section">
-                <label class="register-font">Username*</label><br>
-                <input type="text" class="field" min="5" max="20">
+                <label for="username" class="register-font">Username*</label><br>
+                <input  min="5" max="20"
+                        class="field"
+                        id="username"
+                        th:field="*{username}"
+                        type="text"
+                        placeholder="Username">
             </div>
             <div class="section">
-                <label class="register-font">Email*</label><br>
-                <input type="text" class="field">
+                <label for="email" class="register-font">Email*</label><br>
+                <input
+                        class="field"
+                        id="email"
+                        th:field="*{email}"
+                        type="text"
+                        placeholder="Email">
             </div>
         </div>
         <div class="row">
@@ -41,31 +66,46 @@
         </div>
         <div class="row">
             <div class="section">
-                <label class="register-font">Password*</label><br>
-                <input type="text" class="field" min="5" max="20">
+                <label for="password" class="register-font">Password*</label><br>
+                <input
+                       class="field"
+                       id="password"
+                       th:field="*{password}"
+                       type="password" min="5" max="20"
+                       placeholder="Password">
+                <p class="invalid-feedback errors alert alert-danger">
+                    Паролата е задължителна.
+                </p>
             </div>
             <div class="section">
-                <label class="register-font">Confirm Password</label><br>
-                <input type="text" class="field">
+                <label for="confirmPassword" class="register-font">Confirm Password</label><br>
+                <input class="field"
+                       id="confirmPassword"
+                       th:field="*{confirmPassword}"
+                       type="password" min="5" max="20"
+                       placeholder="confirmPassword">
             </div>
         </div>
         <div class="section">
-            <label class="register-font" >Role</label><br>
-            <select th:erorrclass="is-invalid" id="role" name="role"
+            <label for="role" class="register-font">Role</label><br>
+            <p class="mandatory-field-role"> Изберете роля отговаряща на вашия профил: user(за потребител), owner(за
+                собственици на заведение).</p><br>
+            <select th:erorrclass="is-invalid" id="role" name="role" firstName="role"
                     aria-describedby="categoryHelpInline">
                 <option value="" selected>Assign Role</option>
                 <option th:each="c : ${T(com.example.webrestaurantsite.models.entity.enums.RoleEnums).values()}"
-                        th:value="${c}" th:text="${c}">BATTLE
+                        th:value="${c}" th:text="${c}">
                 </option>
 
             </select>
             <small id="categoryHelpInline" class="invalid-feedback bg-danger text-light rounded">
-                Трябва да изберете роля.
+                Трябва да изберете роля отговаряща на вашият профил.
             </small>
         </div>
         <div class="center-down-register">
             <button class="index-button-register">
-                <a class="nav-link-login-user" th:href="@{/users/register}">Register</a>
+                <input type="submit" class="register-submit-button" value="Register">
+               <!-- <a class="nav-link-login-user" >Register</a> -->
             </button>
         </div>
 

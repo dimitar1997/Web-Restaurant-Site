@@ -10,9 +10,9 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "users")
 public class User extends BasicEntity {
-    private String name;
+    private String firstName;
     private String middleName;
-    private String finalName;
+    private String lastName;
     private String email;
     private String username;
     private String password;
@@ -22,19 +22,16 @@ public class User extends BasicEntity {
     public User() {
     }
 
-
     @NotNull
-    @Column(unique = true)
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public User setName(String name) {
-        this.name = name;
+    public User setFirstName(String firstName) {
+        this.firstName = firstName;
         return this;
     }
 
-    @Column
     public String getMiddleName() {
         return middleName;
     }
@@ -45,12 +42,12 @@ public class User extends BasicEntity {
     }
 
     @NotNull
-    public String getFinalName() {
-        return finalName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public User setFinalName(String finalName) {
-        this.finalName = finalName;
+    public User setLastName(String lastName) {
+        this.lastName = lastName;
         return this;
     }
 
@@ -65,8 +62,8 @@ public class User extends BasicEntity {
     }
 
     @NotNull
-    @Size(min = 5)
-    @Column(nullable = false)
+    @Column(unique = true)
+    @Size(min = 5, max = 20)
     public String getUsername() {
         return username;
     }
@@ -75,10 +72,7 @@ public class User extends BasicEntity {
         this.username = username;
         return this;
     }
-
-    @NotNull
-    @Size(min = 6, max = 20)
-    @Column(nullable = false)
+    @Column()
     public String getPassword() {
         return password;
     }
@@ -88,7 +82,7 @@ public class User extends BasicEntity {
         return this;
     }
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated
     public RoleEnums getRole() {
         return role;
     }

@@ -91,6 +91,19 @@ body > .header {
     border-top-left-radius: 70px;
     border-bottom-right-radius: 70px;
 }
+.blur-register{
+    border: 1px solid blue;
+    filter: blur(23px);
+    background: #f3f3f3;
+    opacity: 0.4;
+    position: absolute;
+    top: 59%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 105%;
+    height: 960px;
+    z-index: 5;
+}
 .banner-text{
     position: absolute;
     top: 50%;
@@ -112,19 +125,18 @@ body > .header {
     padding: 0 1%;
     font-family: sans-serif;
 }
-/* ________________________________________________*/
+/* ________________________________________________ register*/
 ul{
     list-style-type: none;
 }
 .container{
-    border:1px solid green;
     width:80% !important;
     height:100%;
     margin:0 auto;
     padding:0 !important;
+    z-index: 5;
 }
 .row{
-    border:1px solid blue;
     width:100% !important;
     height: 80px;
     margin-right: 0px !important;
@@ -135,7 +147,6 @@ ul{
     width:33.3%;
     height:100%;
     display:inline-block;
-    border:1px solid yellow;
 }
 .titleForm{
     color: white;
@@ -146,6 +157,7 @@ ul{
     padding: 0 20px;
     font-size: 1.5rem;
     margin-top: 2%;
+    z-index: 5;
 }
 
 input.field{
@@ -159,9 +171,11 @@ select{
     background-color:#fff;
 }
 .register-font{
-    color: beige;
+    z-index: 5;
+    color: white;
     font: icon;
     font-weight: 600;
+
 }
 .center-down-register{
     margin-left: 38%;
@@ -176,13 +190,29 @@ select{
     border-radius: 28px;
 
 }
+.register-submit-button{
+    border: none;
+    background-color: #ffd600;
+}
 .mandatory-field{
     margin-left: 30%;
     margin-top: auto;
     margin-bottom: 3%;
     font-family: fantasy;
     color: brown;
+    z-index: 5;
 
+}
+.mandatory-field-role{
+    margin-left: 8%;
+    margin-top: auto;
+    margin-bottom: 3%;
+    font-family: fantasy;
+    color: #b75a5a;
+}
+/* ________________________________________________ login*/
+.login-container-right{
+    margin-left: 258px;
 }
 
 
