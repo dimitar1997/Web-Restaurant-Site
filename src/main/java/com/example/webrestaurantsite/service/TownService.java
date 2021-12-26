@@ -1,6 +1,8 @@
 package com.example.webrestaurantsite.service;
 
 
+import java.io.IOException;
+
 public interface TownService {
-    void add(String townName);
+    void add() throws IOException;
 }

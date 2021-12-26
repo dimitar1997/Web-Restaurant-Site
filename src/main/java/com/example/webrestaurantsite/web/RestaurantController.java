@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.security.Principal;
 
 @Controller
@@ -41,7 +42,7 @@ private final RestaurantService restaurantService;
     @PostMapping("/add")
     public String add(@Valid AddRestaurantBidingModel addRestaurantBidingModel,
                       BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                      @AuthenticationPrincipal UserDetailsImpl currentUser){
+                      @AuthenticationPrincipal UserDetailsImpl currentUser) throws IOException {
         if (bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("addRestaurantBidingModel", addRestaurantBidingModel)
                     .addFlashAttribute("org.springframework.validation.BindingResult.addRestaurantBidingModel", bindingResult);

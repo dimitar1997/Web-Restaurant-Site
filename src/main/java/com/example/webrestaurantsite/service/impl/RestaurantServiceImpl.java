@@ -14,6 +14,8 @@ import com.example.webrestaurantsite.service.TownService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+
 
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
@@ -39,17 +41,13 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public void addRestaurant(AddRestaurantBidingModel addRestaurantBidingModel, UserDetailsImpl currentUser) {
+    public void addRestaurant(AddRestaurantBidingModel addRestaurantBidingModel, UserDetailsImpl currentUser) throws IOException {
         AddRestaurantServiceModel addRestaurantServiceModel = modelMapper.map(addRestaurantBidingModel, AddRestaurantServiceModel.class);
         Restaurant restaurant = modelMapper.map(addRestaurantServiceModel, Restaurant.class);
         User owner = userRepository.findByUsername(currentUser.getUserIdentifier());
         restaurant.setOwner(owner);
-        Town town = townRepository.findByName(addRestaurantServiceModel.getTown());
-        if (town == null) {
-            townService.add(addRestaurantServiceModel.getName());
-        } else {
-            restaurant.setTown(town);
-        }
+        Town town = townRepository.findByCity(addRestaurantServiceModel.getTown());
+        restaurant.setTown(town);
 
         restaurantRepository.save(restaurant);
     }

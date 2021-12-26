@@ -1,5 +1,7 @@
 package com.example.webrestaurantsite.config;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +16,14 @@ public class ApplicationConfiguration {
         return new ModelMapper();
     }
     @Bean
-    public PasswordEncoder passwordEncoder(){
-       return new Pbkdf2PasswordEncoder();
+    public PasswordEncoder passwordEncoder() {
+        return new Pbkdf2PasswordEncoder();
+    }
+    @Bean
+    public Gson gson(){
+        return new GsonBuilder()
+                .excludeFieldsWithoutExposeAnnotation()
+                .setPrettyPrinting()
+                .create();
     }
 }

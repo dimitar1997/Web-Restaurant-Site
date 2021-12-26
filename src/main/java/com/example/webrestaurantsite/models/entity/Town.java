@@ -7,7 +7,7 @@ import java.util.List;
 @Entity
 @Table(name = "towns")
 public class Town extends BasicEntity {
-    private String name;
+    private String city;
     private List<Restaurant> restaurants;
 
 
@@ -25,13 +25,12 @@ public class Town extends BasicEntity {
     }
 
     @Column(nullable = false, unique = true)
-    public String getName() {
-        return name;
+    public String getCity() {
+        return city;
     }
 
-    public Town setName(String name) {
-        this.name = name;
+    public Town setCity(String city) {
+        this.city = city;
         return this;
     }
-
 }
