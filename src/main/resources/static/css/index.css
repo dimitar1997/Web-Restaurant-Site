@@ -169,6 +169,8 @@ select{
     border:0px;
     border-radius: 8px;
     background-color:#fff;
+    width: 500px;
+    height: 30px;
 }
 .register-font{
     z-index: 5;

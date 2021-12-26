@@ -3,6 +3,7 @@ package com.example.webrestaurantsite.service.impl;
 
 import com.example.webrestaurantsite.models.entity.Town;
 import com.example.webrestaurantsite.models.service.SeedCitiesServiceModel;
+import com.example.webrestaurantsite.models.view.AllTownsViewModel;
 import com.example.webrestaurantsite.repository.TownRepository;
 import com.example.webrestaurantsite.service.TownService;
 import com.google.gson.Gson;
@@ -13,6 +14,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TownServiceImpl implements TownService {
@@ -32,7 +35,7 @@ public class TownServiceImpl implements TownService {
 
     @Override
     public void add() throws IOException {
-        if (townRepository.count() != 0){
+        if (townRepository.count() != 0) {
             return;
         }
 
@@ -45,5 +48,11 @@ public class TownServiceImpl implements TownService {
             Town town = modelMapper.map(seedCitiesServiceModel, Town.class);
             return town;
         }).forEach(townRepository::save);
+    }
+
+    @Override
+    public List<AllTownsViewModel> getAllTowns() {
+        return townRepository.findAll().stream().map(town -> modelMapper.map(town, AllTownsViewModel.class))
+                .collect(Collectors.toList());
     }
 }
