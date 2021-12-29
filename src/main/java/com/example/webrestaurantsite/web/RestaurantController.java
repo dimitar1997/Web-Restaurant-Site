@@ -1,8 +1,10 @@
 package com.example.webrestaurantsite.web;
 
 import com.example.webrestaurantsite.models.BidingModels.AddRestaurantBidingModel;
+import com.example.webrestaurantsite.models.view.AllTownsViewModel;
 import com.example.webrestaurantsite.models.view.RestaurantViewDetailsModel;
 import com.example.webrestaurantsite.service.RestaurantService;
+import com.example.webrestaurantsite.service.TownService;
 import com.example.webrestaurantsite.service.impl.UserDetailsImpl;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -15,14 +17,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/restaurant")
 public class RestaurantController {
-private final RestaurantService restaurantService;
+    private final RestaurantService restaurantService;
+    private final TownService townService;
 
-    public RestaurantController(RestaurantService restaurantService) {
+    public RestaurantController(RestaurantService restaurantService, TownService townService) {
         this.restaurantService = restaurantService;
+        this.townService = townService;
     }
 
 
@@ -34,16 +39,20 @@ private final RestaurantService restaurantService;
 
         return "restaurant-details";
     }
+
     @GetMapping("/add")
-    public String add(){
+    public String add(Model model) {
+
+        List<AllTownsViewModel> allTownsViewModels = townService.getAllTowns();
+        model.addAttribute("allTowns", allTownsViewModels);
         return "add-restaurant";
     }
 
     @PostMapping("/add")
     public String add(@Valid AddRestaurantBidingModel addRestaurantBidingModel,
                       BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                      @AuthenticationPrincipal UserDetailsImpl currentUser) throws IOException {
-        if (bindingResult.hasErrors()){
+                      @AuthenticationPrincipal UserDetailsImpl currentUser, Model model) throws IOException {
+        if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addRestaurantBidingModel", addRestaurantBidingModel)
                     .addFlashAttribute("org.springframework.validation.BindingResult.addRestaurantBidingModel", bindingResult);
             return "redirect:/add";
@@ -51,11 +60,12 @@ private final RestaurantService restaurantService;
         restaurantService.addRestaurant(addRestaurantBidingModel, currentUser);
         return "redirect:/";
     }
+
     @DeleteMapping("/delete/{id}")
     @PreAuthorize("@restaurantServiceImpl.isOwner(#principal.name, #id)")
-    public String deleteRestaurant(@PathVariable Long id, Principal principal){
+    public String deleteRestaurant(@PathVariable Long id, Principal principal) {
         restaurantService.delete(id);
-        return  "redirect:/";
+        return "redirect:/";
     }
 
 }

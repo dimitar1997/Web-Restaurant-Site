@@ -148,6 +148,12 @@ ul{
     height:100%;
     display:inline-block;
 }
+.section-home{
+    height: 100%;
+    padding-left: 35%;
+    padding-top: 15%;
+}
+
 .titleForm{
     color: white;
     background-color: black;
@@ -177,6 +183,8 @@ select{
     color: white;
     font: icon;
     font-weight: 600;
+    background-color: black;
+    border-radius: 5px;
 
 }
 .center-down-register{
@@ -206,15 +214,33 @@ select{
 
 }
 .mandatory-field-role{
-    margin-left: 8%;
-    margin-top: auto;
-    margin-bottom: 3%;
+    margin: auto 54% 1% auto;
     font-family: fantasy;
     color: #b75a5a;
+    background-color: lavenderblush;
+    border-radius: 8px;
 }
 /* ________________________________________________ login*/
 .login-container-right{
     margin-left: 258px;
+}
+/* ________________________________________________ Add Restaurant*/
+.field-description{
+    height: 124px;
+    border: 0px;
+    border-radius: 8px;
+    background-color: #fff;
+    width: 504px;
+}
+.field-seats{
+    height: 34px;
+}
+.field-address{
+    width: 340px;
+    height: 32px;
+    border: 0px;
+    border-radius: 8px;
+    background-color: #fff;
 }
 
 

@@ -8,7 +8,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "pictures")
 public class Picture extends BasicEntity {
-    private String imageURL;
+    private String image;
     private Restaurant restaurant;
 
     @ManyToOne
@@ -22,12 +22,12 @@ public class Picture extends BasicEntity {
     }
 
     @Column
-    public String getImageURL() {
-        return imageURL;
+    public String getImage() {
+        return image;
     }
 
-    public Picture setImageURL(String imageURL) {
-        this.imageURL = imageURL;
+    public Picture setImage(String image) {
+        this.image = image;
         return this;
     }
 }

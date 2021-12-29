@@ -2,8 +2,6 @@ package com.example.webrestaurantsite.models.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "restaurants")
@@ -13,27 +11,27 @@ public class Restaurant extends BasicEntity {
     private String description;
     private String address;
     private User owner;
-    private int seats;
-    private Town town;
+    private int capacity;
+    private Town city;
 
     @ManyToOne
     @NotNull
-    public Town getTown() {
-        return town;
+    public Town getCity() {
+        return city;
     }
 
-    public Restaurant setTown(Town town) {
-        this.town = town;
+    public Restaurant setCity(Town city) {
+        this.city = city;
         return this;
     }
 
     @NotNull
-    public int getSeats() {
-        return seats;
+    public int getCapacity() {
+        return capacity;
     }
 
-    public Restaurant setSeats(int seats) {
-        this.seats = seats;
+    public Restaurant setCapacity(int capacity) {
+        this.capacity = capacity;
         return this;
     }
 

@@ -1,6 +1,5 @@
 package com.example.webrestaurantsite.models.BidingModels;
 
-import com.example.webrestaurantsite.models.entity.Town;
 import com.example.webrestaurantsite.models.entity.User;
 
 import javax.validation.constraints.NotNull;
@@ -11,7 +10,7 @@ public class AddRestaurantBidingModel {
     private String description;
     private String address;
     private User owner;
-    private int seats;
+    private int capacity;
     private String town;
 
 
@@ -65,12 +64,12 @@ public class AddRestaurantBidingModel {
     }
 
     @Positive
-    public int getSeats() {
-        return seats;
+    public int getCapacity() {
+        return capacity;
     }
 
-    public AddRestaurantBidingModel setSeats(int seats) {
-        this.seats = seats;
+    public AddRestaurantBidingModel setCapacity(int capacity) {
+        this.capacity = capacity;
         return this;
     }
 }

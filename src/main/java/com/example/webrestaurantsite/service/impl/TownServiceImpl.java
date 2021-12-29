@@ -52,7 +52,7 @@ public class TownServiceImpl implements TownService {
 
     @Override
     public List<AllTownsViewModel> getAllTowns() {
-        return townRepository.findAll().stream().map(town -> modelMapper.map(town, AllTownsViewModel.class))
+        return townRepository.findAll().stream().sorted((o1, o2) -> o1.getCity().compareTo(o2.getCity())).map(town -> modelMapper.map(town, AllTownsViewModel.class))
                 .collect(Collectors.toList());
     }
 }

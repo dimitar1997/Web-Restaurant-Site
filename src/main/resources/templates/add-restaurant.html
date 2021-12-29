@@ -1,11 +1,85 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<head th:replace="/fragments/head::head">
 </head>
+<header th:replace="/fragments/navbar::header"></header>
 <body>
+<div class="container">
+    <form th:action="@{/restaurant/add}"
+          th:method="post">
+        <div class="row">
+            <h1 class="titleForm">Add restaurant</h1>
+            <div class="mandatory-field"> Полетата с * са задължителни</div>
+        </div>
 
+        <div class="row">
+            <div class="section">
+                <label for="name" class="register-font">Name*</label><br>
+                <input class="field"
+                       id="name"
+
+                       type="text"
+                       placeholder="Name">
+            </div>
+            <div class="section">
+                <label for="image" class="register-font">Image*</label><br>
+                <input class="field"
+                       id="image"
+                       type="file"
+                       placeholder="Add image">
+
+            </div>
+            <div class="section">
+                <label for="city" class="register-font">Cities</label><br>
+                <select th:erorrclass="is-invalid" id="city" name="city"
+                        aria-describedby="categoryHelpInline">
+                    <option value="" selected>All cities</option>
+                    <option th:each="c : ${allTowns}"
+                            th:value="${c}" th:text="${c.getCity()}">
+                    </option>
+
+                </select>
+                <small id="categoryHelpInline" class="invalid-feedback bg-danger text-light rounded">
+                    Трябва да изберете град отговарящ на вашето заведение.
+                </small>
+            </div>
+        </div>
+        <div class="row-description">
+            <div class="section">
+                <label for="description" class="register-font">Description*</label><br>
+                <textarea
+                        class="field-description"
+                        id="description"
+                        placeholder="Description"
+                        rows="4" cols="50" name="description" form="description"></textarea>
+            </div>
+            <div class="row">
+                <label for="capacity" class="register-font">Capacity*</label><br>
+                <input
+                        class="field-capacity"
+                        id="capacity"
+                        type="number"
+                        placeholder="Capacity">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="section">
+                <label for="address" class="register-font">Address*</label><br>
+                <input
+                        class="field-address"
+                        id="address"
+                        type="text" min="5"
+                        placeholder="Address">
+                <p class="invalid-feedback errors alert alert-danger">
+                    Адреса е задължителен.
+                </p>
+            </div>
+        </div>
+
+
+    </form>
+</div>
 </body>
 </html>

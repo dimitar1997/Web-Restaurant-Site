@@ -14,7 +14,7 @@ public class Town extends BasicEntity {
     public Town() {
     }
 
-    @OneToMany(mappedBy = "town", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "city", fetch = FetchType.EAGER)
     public List<Restaurant> getRestaurants() {
         return restaurants;
     }

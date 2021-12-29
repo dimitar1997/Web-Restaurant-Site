@@ -47,7 +47,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         User owner = userRepository.findByUsername(currentUser.getUserIdentifier());
         restaurant.setOwner(owner);
         Town town = townRepository.findByCity(addRestaurantServiceModel.getTown());
-        restaurant.setTown(town);
+        restaurant.setCity(town);
 
         restaurantRepository.save(restaurant);
     }
