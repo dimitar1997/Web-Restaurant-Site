@@ -1,8 +1,10 @@
 package com.example.webrestaurantsite.web;
 
+import com.example.webrestaurantsite.models.BidingModels.AddPictureBidingModel;
 import com.example.webrestaurantsite.models.BidingModels.AddRestaurantBidingModel;
 import com.example.webrestaurantsite.models.view.AllTownsViewModel;
 import com.example.webrestaurantsite.models.view.RestaurantViewDetailsModel;
+import com.example.webrestaurantsite.service.PictureService;
 import com.example.webrestaurantsite.service.RestaurantService;
 import com.example.webrestaurantsite.service.TownService;
 import com.example.webrestaurantsite.service.impl.UserDetailsImpl;
@@ -24,10 +26,12 @@ import java.util.List;
 public class RestaurantController {
     private final RestaurantService restaurantService;
     private final TownService townService;
+    private final PictureService pictureService;
 
-    public RestaurantController(RestaurantService restaurantService, TownService townService) {
+    public RestaurantController(RestaurantService restaurantService, TownService townService, PictureService pictureService) {
         this.restaurantService = restaurantService;
         this.townService = townService;
+        this.pictureService = pictureService;
     }
 
 
@@ -49,15 +53,16 @@ public class RestaurantController {
     }
 
     @PostMapping("/add")
-    public String add(@Valid AddRestaurantBidingModel addRestaurantBidingModel,
+    public String add(@Valid AddRestaurantBidingModel addRestaurantBidingModel, AddPictureBidingModel addPictureBidingModel,
                       BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                      @AuthenticationPrincipal UserDetailsImpl currentUser, Model model) throws IOException {
+                      @AuthenticationPrincipal UserDetailsImpl currentUser) throws IOException {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addRestaurantBidingModel", addRestaurantBidingModel)
+                    .addFlashAttribute("addPictureBidingModel", addPictureBidingModel)
                     .addFlashAttribute("org.springframework.validation.BindingResult.addRestaurantBidingModel", bindingResult);
             return "redirect:/add";
         }
-        restaurantService.addRestaurant(addRestaurantBidingModel, currentUser);
+        restaurantService.addRestaurant(addRestaurantBidingModel, currentUser, addPictureBidingModel);
         return "redirect:/";
     }
 
@@ -66,6 +71,16 @@ public class RestaurantController {
     public String deleteRestaurant(@PathVariable Long id, Principal principal) {
         restaurantService.delete(id);
         return "redirect:/";
+    }
+
+    @ModelAttribute
+    public AddRestaurantBidingModel addRestaurantBidingModel(){
+        return new AddRestaurantBidingModel();
+    }
+
+    @ModelAttribute
+    public AddPictureBidingModel addPictureBidingModel(){
+        return new AddPictureBidingModel();
     }
 
 }

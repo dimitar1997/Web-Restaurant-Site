@@ -242,6 +242,9 @@ select{
     border-radius: 8px;
     background-color: #fff;
 }
+.field-capacity{
+    height: 28px;
+}
 
 
 

@@ -22,6 +22,7 @@ public class RegisterBidingModel {
     public RegisterBidingModel() {
     }
 
+    @NotNull
     public String getConfirmPassword() {
         return confirmPassword;
     }
@@ -93,6 +94,7 @@ public class RegisterBidingModel {
         return this;
     }
 
+    @NotNull
     public String getFirstName() {
         return firstName;
     }
@@ -102,7 +104,7 @@ public class RegisterBidingModel {
         return this;
     }
 
-
+    @NotNull
     public RoleEnums getRole() {
         return role;
     }

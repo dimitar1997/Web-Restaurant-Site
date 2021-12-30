@@ -1,26 +1,25 @@
 package com.example.webrestaurantsite.models.BidingModels;
 
-import com.example.webrestaurantsite.models.entity.User;
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 
 public class AddRestaurantBidingModel {
     private String name;
     private String description;
     private String address;
-    private User owner;
     private int capacity;
-    private String town;
+    private String city;
+
 
 
     @NotNull
-    public String getTown() {
-        return town;
+    public String getCity() {
+        return city;
     }
 
-    public AddRestaurantBidingModel setTown(String town) {
-        this.town = town;
+    public AddRestaurantBidingModel setCity(String city) {
+        this.city = city;
         return this;
     }
 
@@ -33,7 +32,7 @@ public class AddRestaurantBidingModel {
         this.name = name;
         return this;
     }
-
+    @Size(min = 10)
     public String getDescription() {
         return description;
     }
@@ -53,15 +52,6 @@ public class AddRestaurantBidingModel {
         return this;
     }
 
-    @NotNull
-    public User getOwner() {
-        return owner;
-    }
-
-    public AddRestaurantBidingModel setOwner(User owner) {
-        this.owner = owner;
-        return this;
-    }
 
     @Positive
     public int getCapacity() {

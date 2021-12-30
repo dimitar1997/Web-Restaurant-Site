@@ -7,7 +7,7 @@
 <body>
 <div class="container">
     <form th:action="@{/restaurant/add}"
-          th:method="post">
+          th:method="post" th:object="${addRestaurantBidingModel}">
         <div class="row">
             <h1 class="titleForm">Add restaurant</h1>
             <div class="mandatory-field"> Полетата с * са задължителни</div>
@@ -17,26 +17,29 @@
             <div class="section">
                 <label for="name" class="register-font">Name*</label><br>
                 <input class="field"
+                       th:field="*{name}"
                        id="name"
-
+                       name="name"
                        type="text"
                        placeholder="Name">
             </div>
-            <div class="section">
+            <div class="section" th:object="${addPictureBidingModel}">
                 <label for="image" class="register-font">Image*</label><br>
                 <input class="field"
+                       th:field="*{image}"
                        id="image"
+                       name="image"
                        type="file"
                        placeholder="Add image">
 
             </div>
             <div class="section">
                 <label for="city" class="register-font">Cities</label><br>
-                <select th:erorrclass="is-invalid" id="city" name="city"
+                <select th:field="*{city}" th:erorrclass="is-invalid" id="city" name="city"
                         aria-describedby="categoryHelpInline">
                     <option value="" selected>All cities</option>
                     <option th:each="c : ${allTowns}"
-                            th:value="${c}" th:text="${c.getCity()}">
+                            th:value="${c.city}" th:text="${c.city}">
                     </option>
 
                 </select>
@@ -47,18 +50,23 @@
         </div>
         <div class="row-description">
             <div class="section">
-                <label for="description" class="register-font">Description*</label><br>
+                <label   for="description" class="register-font">Description*</label><br>
                 <textarea
+
                         class="field-description"
                         id="description"
+                        name="description"
                         placeholder="Description"
-                        rows="4" cols="50" name="description" form="description"></textarea>
+                        rows="4" cols="50"
+                        th:field="*{description}"></textarea>
             </div>
             <div class="row">
                 <label for="capacity" class="register-font">Capacity*</label><br>
                 <input
+                        th:field="*{capacity}"
                         class="field-capacity"
                         id="capacity"
+                        name="capacity"
                         type="number"
                         placeholder="Capacity">
             </div>
@@ -68,14 +76,21 @@
             <div class="section">
                 <label for="address" class="register-font">Address*</label><br>
                 <input
+                        th:field="*{address}"
                         class="field-address"
                         id="address"
+                        name="address"
                         type="text" min="5"
                         placeholder="Address">
                 <p class="invalid-feedback errors alert alert-danger">
                     Адреса е задължителен.
                 </p>
             </div>
+        </div>
+        <div class="center-down-register">
+            <button class="index-button-register">
+                <input type="submit" class="register-submit-button" value="Add restaurant">
+            </button>
         </div>
 
 

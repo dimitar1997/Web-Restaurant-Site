@@ -4,11 +4,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.io.File;
 
 @Entity
 @Table(name = "pictures")
 public class Picture extends BasicEntity {
-    private String image;
+    private File image;
     private Restaurant restaurant;
 
     @ManyToOne
@@ -22,11 +23,11 @@ public class Picture extends BasicEntity {
     }
 
     @Column
-    public String getImage() {
+    public File getImage() {
         return image;
     }
 
-    public Picture setImage(String image) {
+    public Picture setImage(File image) {
         this.image = image;
         return this;
     }

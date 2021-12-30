@@ -1,25 +1,21 @@
 package com.example.webrestaurantsite.models.service;
 
-import com.example.webrestaurantsite.models.entity.User;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 
 public class AddRestaurantServiceModel {
     private String name;
     private String description;
     private String address;
-    private User owner;
-    private int seats;
-    private String town;
+    private int capacity;
+    private String city;
 
 
-    public String getTown() {
-        return town;
+    public String getCity() {
+        return city;
     }
 
-    public AddRestaurantServiceModel setTown(String town) {
-        this.town = town;
+    public AddRestaurantServiceModel setCity(String city) {
+        this.city = city;
         return this;
     }
 
@@ -32,6 +28,7 @@ public class AddRestaurantServiceModel {
         this.name = name;
         return this;
     }
+
 
     public String getDescription() {
         return description;
@@ -53,21 +50,12 @@ public class AddRestaurantServiceModel {
     }
 
 
-    public User getOwner() {
-        return owner;
+    public int getCapacity() {
+        return capacity;
     }
 
-    public AddRestaurantServiceModel setOwner(User owner) {
-        this.owner = owner;
-        return this;
-    }
-
-    public int getSeats() {
-        return seats;
-    }
-
-    public AddRestaurantServiceModel setSeats(int seats) {
-        this.seats = seats;
+    public AddRestaurantServiceModel setCapacity(int capacity) {
+        this.capacity = capacity;
         return this;
     }
 }
