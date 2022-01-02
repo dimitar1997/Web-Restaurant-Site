@@ -1,6 +1,7 @@
 package com.example.webrestaurantsite.models.BidingModels;
 
 import com.example.webrestaurantsite.models.entity.enums.RoleEnums;
+import com.example.webrestaurantsite.models.validator.UniqueUserName;
 
 import javax.persistence.Enumerated;
 import javax.validation.constraints.Email;
@@ -74,6 +75,7 @@ public class RegisterBidingModel {
 
     @NotBlank
     @Size(min = 4, max = 20)
+    @UniqueUserName
     public String getUsername() {
         return username;
     }

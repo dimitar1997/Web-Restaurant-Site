@@ -48,8 +48,12 @@
                         class="field"
                         id="username"
                         th:field="*{username}"
+                        th:errorclass="is-invalid"
                         type="text"
                         placeholder="Username">
+                <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="invalid-feedback errors alert alert-danger">
+                    Username is required.
+                </p>
             </div>
             <div class="section">
                 <label for="email" class="register-font">Email*</label><br>
