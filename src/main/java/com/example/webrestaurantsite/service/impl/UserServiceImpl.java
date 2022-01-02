@@ -29,4 +29,9 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(registerServiceModel.getPassword()));
         userRepository.save(user);
     }
+
+    @Override
+    public boolean isUserNameFree(String username) {
+        return userRepository.findByUsernameIgnoreCase(username).isEmpty();
+    }
 }
