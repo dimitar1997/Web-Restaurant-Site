@@ -1,6 +1,7 @@
 package com.example.webrestaurantsite.models.view;
 
 public class AllTownsViewModel {
+    private long id;
     private String city;
 
     public AllTownsViewModel() {

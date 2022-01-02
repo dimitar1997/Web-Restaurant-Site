@@ -142,6 +142,7 @@ ul{
     margin-right: 0px !important;
     margin-left: 0px !important;
     margin-top: 5%;
+    border: white 1px;
 }
 .section{
     width:33.3%;
@@ -244,6 +245,25 @@ select{
 }
 .field-capacity{
     height: 28px;
+}
+.photoView{
+    width: 214px;
+    padding: -3px;
+    margin: 0;
+}
+.style-photo{
+    text-align: center;
+    width: 162px;
+    height: 170px;
+    display: block;
+    color: #ececec;
+    font-family: Arial;
+    font-size: 12px;
+    font-weight: normal;
+    text-decoration: none;
+    margin: 18px 14px 0 0;
+    float: left;
+    display: -webkit-box;
 }
 
 

@@ -2,12 +2,15 @@ package com.example.webrestaurantsite.service.impl;
 
 import com.example.webrestaurantsite.models.BidingModels.AddPictureBidingModel;
 import com.example.webrestaurantsite.models.BidingModels.AddRestaurantBidingModel;
+import com.example.webrestaurantsite.models.entity.Picture;
 import com.example.webrestaurantsite.models.entity.Restaurant;
 import com.example.webrestaurantsite.models.entity.Town;
 import com.example.webrestaurantsite.models.entity.User;
 import com.example.webrestaurantsite.models.service.AddPictureViewModel;
 import com.example.webrestaurantsite.models.service.AddRestaurantServiceModel;
+import com.example.webrestaurantsite.models.view.RestaurantArticleViewModel;
 import com.example.webrestaurantsite.models.view.RestaurantViewDetailsModel;
+import com.example.webrestaurantsite.repository.PictureRepository;
 import com.example.webrestaurantsite.repository.RestaurantRepository;
 import com.example.webrestaurantsite.repository.TownRepository;
 import com.example.webrestaurantsite.repository.UserRepository;
@@ -16,6 +19,8 @@ import com.example.webrestaurantsite.service.RestaurantService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -25,14 +30,16 @@ public class RestaurantServiceImpl implements RestaurantService {
     private final ModelMapper modelMapper;
     private final TownRepository townRepository;
     private final PictureService pictureService;
+    private final PictureRepository pictureRepository;
 
 
-    public RestaurantServiceImpl(RestaurantRepository restaurantRepository, UserRepository userRepository, ModelMapper modelMapper, TownRepository townRepository, PictureService pictureService) {
+    public RestaurantServiceImpl(RestaurantRepository restaurantRepository, UserRepository userRepository, ModelMapper modelMapper, TownRepository townRepository, PictureService pictureService, PictureRepository pictureRepository) {
         this.restaurantRepository = restaurantRepository;
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
         this.townRepository = townRepository;
         this.pictureService = pictureService;
+        this.pictureRepository = pictureRepository;
     }
 
 
@@ -60,6 +67,26 @@ public class RestaurantServiceImpl implements RestaurantService {
     public void delete(Long id) {
         restaurantRepository.deleteById(id);
     }
+
+    @Override
+    public List<RestaurantArticleViewModel> allRestaurant(UserDetailsImpl currentUser) {
+        User user = userRepository.findByUsername(currentUser.getUsername());
+        List<Restaurant> restaurants = restaurantRepository.findAllByOwner(user);
+        List<RestaurantArticleViewModel> restaurantArticleViewModels = new ArrayList<>();
+
+        for (Restaurant r: restaurants) {
+            RestaurantArticleViewModel rAVM = modelMapper.map(r,RestaurantArticleViewModel.class);
+            Picture picture = pictureRepository.findByRestaurantId(r.getId());
+            rAVM.setFile(picture.getImage());
+            restaurantArticleViewModels.add(rAVM);
+
+        }
+
+
+
+        return restaurantArticleViewModels;
+    }
+
 
     public boolean isOwner(String userName, Long id) {
         User user = userRepository.findByUsername(userName);

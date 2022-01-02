@@ -3,6 +3,7 @@ package com.example.webrestaurantsite.web;
 import com.example.webrestaurantsite.models.BidingModels.AddPictureBidingModel;
 import com.example.webrestaurantsite.models.BidingModels.AddRestaurantBidingModel;
 import com.example.webrestaurantsite.models.view.AllTownsViewModel;
+import com.example.webrestaurantsite.models.view.RestaurantArticleViewModel;
 import com.example.webrestaurantsite.models.view.RestaurantViewDetailsModel;
 import com.example.webrestaurantsite.service.PictureService;
 import com.example.webrestaurantsite.service.RestaurantService;
@@ -32,6 +33,13 @@ public class RestaurantController {
         this.restaurantService = restaurantService;
         this.townService = townService;
         this.pictureService = pictureService;
+    }
+
+    @GetMapping("my-places")
+    public String myAddedPlaces(@AuthenticationPrincipal UserDetailsImpl currentUser, Model model){
+        List<RestaurantArticleViewModel> restaurantArticleViewModels = restaurantService.allRestaurant(currentUser);
+        model.addAttribute("restaurantArticleViewModels", restaurantArticleViewModels);
+        return "my-places";
     }
 
 
