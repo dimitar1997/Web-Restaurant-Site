@@ -7,7 +7,8 @@
 <body>
 <div class="container">
     <form th:action="@{/restaurant/add}"
-          th:method="post" th:object="${addRestaurantBidingModel}">
+          th:method="post" th:object="${addRestaurantBidingModel}"
+          enctype="multipart/form-data">
         <div class="row">
             <h1 class="titleForm">Add restaurant</h1>
             <div class="mandatory-field"> Полетата с * са задължителни</div>
@@ -92,7 +93,6 @@
                 <input type="submit" class="register-submit-button" value="Add restaurant">
             </button>
         </div>
-
 
     </form>
 </div>

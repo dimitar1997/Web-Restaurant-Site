@@ -23,7 +23,7 @@ import java.security.Principal;
 import java.util.List;
 
 @Controller
-@RequestMapping("/restaurant")
+@RequestMapping("/restaurant" )
 public class RestaurantController {
     private final RestaurantService restaurantService;
     private final TownService townService;
@@ -60,7 +60,7 @@ public class RestaurantController {
         return "add-restaurant";
     }
 
-    @PostMapping("/add")
+    @PostMapping(value = "/add")
     public String add(@Valid AddRestaurantBidingModel addRestaurantBidingModel, AddPictureBidingModel addPictureBidingModel,
                       BindingResult bindingResult, RedirectAttributes redirectAttributes,
                       @AuthenticationPrincipal UserDetailsImpl currentUser) throws IOException {

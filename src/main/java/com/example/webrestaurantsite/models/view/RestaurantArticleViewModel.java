@@ -4,7 +4,7 @@ import java.io.File;
 
 public class RestaurantArticleViewModel {
     private long id;
-    private File file;
+    private String imageUrl;
     private String name;
 
     public long getId() {
@@ -16,12 +16,12 @@ public class RestaurantArticleViewModel {
         return this;
     }
 
-    public File getFile() {
-        return file;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public RestaurantArticleViewModel setFile(File file) {
-        this.file = file;
+    public RestaurantArticleViewModel setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
         return this;
     }
 

@@ -1,11 +1,10 @@
-package com.example.webrestaurantsite.models.BidingModels;
+package com.example.webrestaurantsite.models.service;
 
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotNull;
-import java.io.File;
 
-public class AddPictureBidingModel {
+public class AddPictureServiceModel {
     private MultipartFile image;
 
     @NotNull
@@ -13,7 +12,7 @@ public class AddPictureBidingModel {
         return image;
     }
 
-    public AddPictureBidingModel setImage(MultipartFile image) {
+    public AddPictureServiceModel setImage(MultipartFile image) {
         this.image = image;
         return this;
     }

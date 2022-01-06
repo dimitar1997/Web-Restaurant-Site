@@ -27,6 +27,15 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
     implementation 'com.google.code.gson:gson:2.7'
+    // https://mvnrepository.com/artifact/com.cloudinary/cloudinary-http44
+    implementation 'com.cloudinary:cloudinary-http44:1.2.1'
+
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
+
+//Thanks for using https://jar-download.com
+
+
 
 }
 

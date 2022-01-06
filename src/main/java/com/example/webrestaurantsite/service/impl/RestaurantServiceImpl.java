@@ -6,7 +6,7 @@ import com.example.webrestaurantsite.models.entity.Picture;
 import com.example.webrestaurantsite.models.entity.Restaurant;
 import com.example.webrestaurantsite.models.entity.Town;
 import com.example.webrestaurantsite.models.entity.User;
-import com.example.webrestaurantsite.models.service.AddPictureViewModel;
+import com.example.webrestaurantsite.models.service.AddPictureServiceModel;
 import com.example.webrestaurantsite.models.service.AddRestaurantServiceModel;
 import com.example.webrestaurantsite.models.view.RestaurantArticleViewModel;
 import com.example.webrestaurantsite.models.view.RestaurantViewDetailsModel;
@@ -19,6 +19,7 @@ import com.example.webrestaurantsite.service.RestaurantService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +51,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public void addRestaurant(AddRestaurantBidingModel addRestaurantBidingModel, UserDetailsImpl currentUser, AddPictureBidingModel addPictureBidingModel)  {
+    public void addRestaurant(AddRestaurantBidingModel addRestaurantBidingModel, UserDetailsImpl currentUser, AddPictureBidingModel addPictureBidingModel) throws IOException {
         AddRestaurantServiceModel addRestaurantServiceModel = modelMapper.map(addRestaurantBidingModel, AddRestaurantServiceModel.class);
         Restaurant restaurant = modelMapper.map(addRestaurantServiceModel, Restaurant.class);
         User owner = userRepository.findByUsername(currentUser.getUserIdentifier());
@@ -59,8 +60,8 @@ public class RestaurantServiceImpl implements RestaurantService {
         restaurant.setCity(town);
 
         restaurantRepository.save(restaurant);
-        AddPictureViewModel addPictureViewModel = modelMapper.map(addPictureBidingModel, AddPictureViewModel.class);
-        pictureService.addPicture(addPictureViewModel, restaurant);
+        AddPictureServiceModel addPictureServiceModel = modelMapper.map(addPictureBidingModel, AddPictureServiceModel.class);
+        pictureService.addPicture(addPictureServiceModel, restaurant);
     }
 
     @Override
@@ -77,7 +78,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         for (Restaurant r: restaurants) {
             RestaurantArticleViewModel rAVM = modelMapper.map(r,RestaurantArticleViewModel.class);
             Picture picture = pictureRepository.findByRestaurantId(r.getId());
-            rAVM.setFile(picture.getImage());
+            rAVM.setImageUrl(picture.getImageUrl());
             restaurantArticleViewModels.add(rAVM);
 
         }

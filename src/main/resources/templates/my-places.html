@@ -6,7 +6,7 @@
 <body >
 <div th:each="r : ${restaurantArticleViewModels}" th:object="${r}" class="all-classes-container style-photo">
 <article >
-<img  class="photoView" src="https://cdn.mos.cms.futurecdn.net/CAZ6JXi6huSuN4QGE627NR.jpg" >
+<img  class="photoView" th:src="*{imageUrl}" >
     <p th:text="*{name}"></p>
 </article>
 </div>

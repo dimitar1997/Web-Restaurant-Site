@@ -1,16 +1,25 @@
 package com.example.webrestaurantsite.models.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.io.File;
+
 
 @Entity
 @Table(name = "pictures")
 public class Picture extends BasicEntity {
-    private File image;
+    private String imageUrl;
     private Restaurant restaurant;
+    private String publicId;
+
+    public String getPublicId() {
+        return publicId;
+    }
+
+    public Picture setPublicId(String publicId) {
+        this.publicId = publicId;
+        return this;
+    }
 
     @ManyToOne
     public Restaurant getRestaurant() {
@@ -22,13 +31,12 @@ public class Picture extends BasicEntity {
         return this;
     }
 
-    @Column
-    public File getImage() {
-        return image;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public Picture setImage(File image) {
-        this.image = image;
+    public Picture setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
         return this;
     }
 }

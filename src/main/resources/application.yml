@@ -14,7 +14,6 @@ spring:
             enabled: true
 
 
-
   jpa:
     # Choose either MySQL 8 or MySQL 5 below
     # For MySQL 8
@@ -28,8 +27,15 @@ spring:
       hibernate:
         format_sql: true
     defer-datasource-initialization: true
-  #Cloudinary Properties
-  #cloudinary:
-  #api-key:
-  #api-secret:
-  #cloud-name:
+
+cloudinary:
+  api-key: 977641752662921
+  api-secret: sJuxO9vfTtZ98pqHsteVyhzbnVk
+  cloud-name: dln312h3o
+
+
+
+  servlet:
+    multipart:
+      max-file-size: 15MB
+      max-request-size: 15MB
