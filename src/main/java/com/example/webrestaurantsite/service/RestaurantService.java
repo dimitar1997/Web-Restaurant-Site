@@ -16,4 +16,6 @@ public interface RestaurantService {
 
     void delete(Long id);
     List<RestaurantArticleViewModel> allRestaurant(UserDetailsImpl currentUser);
+
+    RestaurantViewDetailsModel findRestaurantById(Long updateId);
 }

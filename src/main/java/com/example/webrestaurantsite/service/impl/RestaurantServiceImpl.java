@@ -16,6 +16,7 @@ import com.example.webrestaurantsite.repository.TownRepository;
 import com.example.webrestaurantsite.repository.UserRepository;
 import com.example.webrestaurantsite.service.PictureService;
 import com.example.webrestaurantsite.service.RestaurantService;
+import com.example.webrestaurantsite.web.exceptions.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -46,8 +47,11 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public RestaurantViewDetailsModel details(Long restaurantId) {
-        Restaurant restaurant = restaurantRepository.getById(restaurantId);
-        return modelMapper.map(restaurant, RestaurantViewDetailsModel.class);
+        Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow(() -> new ObjectNotFoundException("Restaurant whit id " + restaurantId + "not found!"));
+        RestaurantViewDetailsModel restaurantViewDetailsModel = modelMapper.map(restaurant, RestaurantViewDetailsModel.class);
+        restaurantViewDetailsModel.setImgUrl(pictureRepository.findByRestaurantId(restaurantId).getImageUrl());
+        restaurantViewDetailsModel.setCity(restaurant.getCity().getCity());
+        return restaurantViewDetailsModel;
     }
 
     @Override
@@ -75,8 +79,8 @@ public class RestaurantServiceImpl implements RestaurantService {
         List<Restaurant> restaurants = restaurantRepository.findAllByOwner(user);
         List<RestaurantArticleViewModel> restaurantArticleViewModels = new ArrayList<>();
 
-        for (Restaurant r: restaurants) {
-            RestaurantArticleViewModel rAVM = modelMapper.map(r,RestaurantArticleViewModel.class);
+        for (Restaurant r : restaurants) {
+            RestaurantArticleViewModel rAVM = modelMapper.map(r, RestaurantArticleViewModel.class);
             Picture picture = pictureRepository.findByRestaurantId(r.getId());
             rAVM.setImageUrl(picture.getImageUrl());
             restaurantArticleViewModels.add(rAVM);
@@ -84,8 +88,13 @@ public class RestaurantServiceImpl implements RestaurantService {
         }
 
 
-
         return restaurantArticleViewModels;
+    }
+
+    @Override
+    public RestaurantViewDetailsModel findRestaurantById(Long updateId) {
+        Restaurant restaurant = restaurantRepository.findById(updateId).orElseThrow(() -> new ObjectNotFoundException("Restaurant whit id " + updateId + " not found!"));
+        return modelMapper.map(restaurant, RestaurantViewDetailsModel.class);
     }
 
 

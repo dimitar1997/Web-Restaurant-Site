@@ -14,7 +14,7 @@ public class Restaurant extends BasicEntity {
     private int capacity;
     private Town city;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @NotNull
     public Town getCity() {
         return city;
@@ -66,7 +66,7 @@ public class Restaurant extends BasicEntity {
         return this;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     public User getOwner() {
         return owner;
     }

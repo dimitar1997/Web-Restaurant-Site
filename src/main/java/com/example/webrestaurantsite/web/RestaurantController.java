@@ -2,6 +2,7 @@ package com.example.webrestaurantsite.web;
 
 import com.example.webrestaurantsite.models.BidingModels.AddPictureBidingModel;
 import com.example.webrestaurantsite.models.BidingModels.AddRestaurantBidingModel;
+import com.example.webrestaurantsite.models.BidingModels.RestaurantUpdateBidingModel;
 import com.example.webrestaurantsite.models.view.AllTownsViewModel;
 import com.example.webrestaurantsite.models.view.RestaurantArticleViewModel;
 import com.example.webrestaurantsite.models.view.RestaurantViewDetailsModel;
@@ -23,7 +24,7 @@ import java.security.Principal;
 import java.util.List;
 
 @Controller
-@RequestMapping("/restaurant" )
+@RequestMapping("/restaurant")
 public class RestaurantController {
     private final RestaurantService restaurantService;
     private final TownService townService;
@@ -36,7 +37,7 @@ public class RestaurantController {
     }
 
     @GetMapping("my-places")
-    public String myAddedPlaces(@AuthenticationPrincipal UserDetailsImpl currentUser, Model model){
+    public String myAddedPlaces(@AuthenticationPrincipal UserDetailsImpl currentUser, Model model) {
         List<RestaurantArticleViewModel> restaurantArticleViewModels = restaurantService.allRestaurant(currentUser);
         model.addAttribute("restaurantArticleViewModels", restaurantArticleViewModels);
         return "my-places";
@@ -81,13 +82,39 @@ public class RestaurantController {
         return "redirect:/";
     }
 
+
+    @GetMapping("/update/{updateId}")
+    public String updateRestaurant(@PathVariable Long updateId, Model model,
+                                   @AuthenticationPrincipal UserDetailsImpl currentUser) {
+
+       RestaurantViewDetailsModel restaurantViewDetailsModel = restaurantService.findRestaurantById(updateId);
+       model.addAttribute("restaurantViewDetailsModel", restaurantViewDetailsModel);
+        return "update";
+    }
+
+    @PatchMapping("/update/{updateId}")
+    public String updateRestaurant(@PathVariable Long updateId, @Valid RestaurantUpdateBidingModel restaurantUpdateBidingModel,
+                                   BindingResult bindingResult,
+                                   RedirectAttributes redirectAttributes) {
+
+
+        if (bindingResult.hasErrors()) {
+
+            redirectAttributes.addFlashAttribute("restaurantUpdateBidingModel", restaurantUpdateBidingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.restaurantUpdateBidingModel", bindingResult);
+
+            return "redirect:/restaurant/update/" + updateId;
+        }
+        return "redirect:/restaurant/details/" + updateId;
+    }
+
     @ModelAttribute
-    public AddRestaurantBidingModel addRestaurantBidingModel(){
+    public AddRestaurantBidingModel addRestaurantBidingModel() {
         return new AddRestaurantBidingModel();
     }
 
     @ModelAttribute
-    public AddPictureBidingModel addPictureBidingModel(){
+    public AddPictureBidingModel addPictureBidingModel() {
         return new AddPictureBidingModel();
     }
 

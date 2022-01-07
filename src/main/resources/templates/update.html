@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/head::head"></head>
+<header th:replace="/fragments/navbar::header"></header>
+<body>
+<form th:object="${restaurantViewDetailsModel}"
+      th:href="@{/restaurant/update/{updateId}(updateId=*{id})}"
+      th:method="patch">
+
+</form>
+</body>
+</html>

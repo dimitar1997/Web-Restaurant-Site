@@ -1,17 +1,16 @@
 package com.example.webrestaurantsite.models.view;
 
-import java.io.File;
 
 public class RestaurantArticleViewModel {
-    private long id;
+    private Long id;
     private String imageUrl;
     private String name;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public RestaurantArticleViewModel setId(long id) {
+    public RestaurantArticleViewModel setId(Long id) {
         this.id = id;
         return this;
     }

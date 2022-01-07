@@ -70,12 +70,13 @@ body > .header {
 }
 
 
-.nav-link-login-user{
+.nav-link-login-user {
     color: black;
     text-decoration: none;
     font-family: monospace !IMPORTANT;
 }
-.blur{
+
+.blur {
     border: 1px solid blue;
     filter: blur(23px);
     background: #000000;
@@ -83,7 +84,7 @@ body > .header {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     /* z-index: 5; */
     width: 45%;
     height: 254px;
@@ -91,7 +92,8 @@ body > .header {
     border-top-left-radius: 70px;
     border-bottom-right-radius: 70px;
 }
-.blur-register{
+
+.blur-register {
     border: 1px solid blue;
     filter: blur(23px);
     background: #f3f3f3;
@@ -99,63 +101,69 @@ body > .header {
     position: absolute;
     top: 59%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     width: 105%;
     height: 960px;
     z-index: 5;
 }
-.banner-text{
+
+.banner-text {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     z-index: 5;
     width: 45%;
     padding: 40px 0;
     text-align: center;
     border-top-left-radius: 70px;
     border-bottom-right-radius: 70px;
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(0, 0, 0, 0.3);
     color: #fff;
     font-weight: bold;
     border: 5px inset #fff;
 }
 
-.banner-text p{
+.banner-text p {
     padding: 0 1%;
     font-family: sans-serif;
 }
+
 /* ________________________________________________ register*/
-ul{
+ul {
     list-style-type: none;
 }
-.container{
-    width:80% !important;
-    height:100%;
-    margin:0 auto;
-    padding:0 !important;
+
+.container {
+    width: 80% !important;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 !important;
     z-index: 5;
 }
-.row{
-    width:100% !important;
+
+.row {
+    width: 100% !important;
     height: 80px;
     margin-right: 0px !important;
     margin-left: 0px !important;
     margin-top: 5%;
     border: white 1px;
 }
-.section{
-    width:33.3%;
-    height:100%;
-    display:inline-block;
+
+.section {
+    width: 33.3%;
+    height: 100%;
+    display: inline-block;
 }
-.section-home{
+
+.section-home {
     height: 100%;
     padding-left: 35%;
     padding-top: 15%;
 }
 
-.titleForm{
+.titleForm {
     color: white;
     background-color: black;
     border-radius: 8px;
@@ -167,19 +175,21 @@ ul{
     z-index: 5;
 }
 
-input.field{
-    border:0px;
+input.field {
+    border: 0px;
     border-radius: 8px;
-    background-color:#fff;
+    background-color: #fff;
 }
-select{
-    border:0px;
+
+select {
+    border: 0px;
     border-radius: 8px;
-    background-color:#fff;
+    background-color: #fff;
     width: 500px;
     height: 30px;
 }
-.register-font{
+
+.register-font {
     z-index: 5;
     color: white;
     font: icon;
@@ -188,11 +198,13 @@ select{
     border-radius: 5px;
 
 }
-.center-down-register{
+
+.center-down-register {
     margin-left: 38%;
     margin-top: 10%;
 }
-.index-button-register{
+
+.index-button-register {
     border: none;
     height: 37px;
     padding-left: 109px;
@@ -201,11 +213,13 @@ select{
     border-radius: 28px;
 
 }
-.register-submit-button{
+
+.register-submit-button {
     border: none;
     background-color: #ffd600;
 }
-.mandatory-field{
+
+.mandatory-field {
     margin-left: 30%;
     margin-top: auto;
     margin-bottom: 3%;
@@ -214,44 +228,52 @@ select{
     z-index: 5;
 
 }
-.mandatory-field-role{
+
+.mandatory-field-role {
     margin: auto 54% 1% auto;
     font-family: fantasy;
     color: #b75a5a;
     background-color: lavenderblush;
     border-radius: 8px;
 }
+
 /* ________________________________________________ login*/
-.login-container-right{
+.login-container-right {
     margin-left: 258px;
 }
+
 /* ________________________________________________ Add Restaurant*/
-.field-description{
+.field-description {
     height: 124px;
     border: 0px;
     border-radius: 8px;
     background-color: #fff;
     width: 504px;
 }
-.field-seats{
+
+.field-seats {
     height: 34px;
 }
-.field-address{
+
+.field-address {
     width: 340px;
     height: 32px;
     border: 0px;
     border-radius: 8px;
     background-color: #fff;
 }
-.field-capacity{
+
+.field-capacity {
     height: 28px;
 }
-.photoView{
+
+.photoView {
     width: 214px;
     padding: -3px;
     margin: 0;
 }
-.style-photo{
+
+.style-photo {
     text-align: center;
     width: 231px;
     height: 170px;
@@ -264,6 +286,51 @@ select{
     margin: 18px 14px 0 0;
     float: left;
     display: -webkit-box;
+}
+
+/*------------------------------- Details*/
+.card-img-top {
+    width: 100%;
+    border-top-left-radius: calc(.25rem - 1px);
+    border-top-right-radius: calc(.25rem - 1px)
+}
+
+.card-text {
+    margin-bottom: 0;
+    color: black;
+    height: auto;
+    font-size: 20px;
+
+}
+
+.container-fluid {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+}
+
+.text-center {
+    text-align: center !important
+}
+
+.card {
+    margin: 0.25rem !important;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #b2bb48;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: 0.25rem;
+}
+
+.group-background {
+    position: relative;
+    display: block;
+    padding: 1.75rem 6.25rem;
+    background-color: rgba(15, 71, 22, 0.43);
+    border: 1px solid rgba(0, 0, 0, .125);
 }
 
 

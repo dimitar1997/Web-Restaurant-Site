@@ -1,11 +1,47 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<head th:replace="/fragments/head::head"></head>
+<header th:replace="/fragments/navbar::header"></header>
 <body>
 
+<div class="container-fluid">
+    <h2 class="text-center text-white mt-5">Details</h2>
+    <div class="offers row mx-auto d-flex flex-row justify-content-center">
+        <div th:object="${restaurantViewDetailsModel}"
+             class="offer card col-sm-2 col-md-3  col-lg-4 m-1 p-0">
+
+            <div class="card">
+                <img class="card-img-top" th:src="*{getImgUrl()}"  alt="Image">
+            </div>
+
+            <ul class="offer-details list-group list-group-flush">
+                <li class="group-background">
+                    <div class="card-text"><span th:text="|Name: *{name}|">• Name</span></div>
+
+                    <div class="card-text"><span th:text="|Description: *{description}|"> Description</span></div>
+                    <div class="card-text"><span th:text="|Capacity left: *{capacity}|">• Capacity left</span></div>
+                    <div class="card-text"><span th:text="|Town: *{city}|">• City</span></div>
+                    <div class="card-text"><span th:text="|Address: *{address}|">• Address</span></div>
+                    <div class="row">
+                        <a class="nav-link" th:href="@{/restaurant/update/{updateId}(updateId=*{id})}">Update</a>
+                    </div>
+
+
+            </ul>
+<!--            <div class="card-body">-->
+<!--                <div class="row">-->
+<!--                    <a class="btn btn-link" th:href="@{/offers/{id}/edit(id=*{id})}">Update</a>-->
+<!--                    <th:block th:if="*{canDelete}">-->
+<!--                        <form th:action="@{/offers/{id}(id=*{id})}" th:method="delete">-->
+<!--                            <input type="submit" class="btn btn-link" value="Delete"/>-->
+<!--                        </form>-->
+<!--                    </th:block>-->
+<!--                </div>-->
+<!--            </div>-->
+        </div>
+
+    </div>
+</div>
 </body>
 </html>

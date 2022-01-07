@@ -1,39 +1,17 @@
 package com.example.webrestaurantsite.models.view;
 
-
-
-public class RestaurantViewDetailsModel {
+public class RestaurantUpdateViewModel {
     private Long id;
-    private String imgUrl;
     private String name;
     private String description;
     private String address;
     private int capacity;
-    private String city;
-
-    public String getCity() {
-        return city;
-    }
-
-    public RestaurantViewDetailsModel setCity(String city) {
-        this.city = city;
-        return this;
-    }
-
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
-    public RestaurantViewDetailsModel setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-        return this;
-    }
 
     public Long getId() {
         return id;
     }
 
-    public RestaurantViewDetailsModel setId(Long id) {
+    public RestaurantUpdateViewModel setId(Long id) {
         this.id = id;
         return this;
     }
@@ -42,7 +20,7 @@ public class RestaurantViewDetailsModel {
         return name;
     }
 
-    public RestaurantViewDetailsModel setName(String name) {
+    public RestaurantUpdateViewModel setName(String name) {
         this.name = name;
         return this;
     }
@@ -51,7 +29,7 @@ public class RestaurantViewDetailsModel {
         return description;
     }
 
-    public RestaurantViewDetailsModel setDescription(String description) {
+    public RestaurantUpdateViewModel setDescription(String description) {
         this.description = description;
         return this;
     }
@@ -60,7 +38,7 @@ public class RestaurantViewDetailsModel {
         return address;
     }
 
-    public RestaurantViewDetailsModel setAddress(String address) {
+    public RestaurantUpdateViewModel setAddress(String address) {
         this.address = address;
         return this;
     }
@@ -69,7 +47,7 @@ public class RestaurantViewDetailsModel {
         return capacity;
     }
 
-    public RestaurantViewDetailsModel setCapacity(int capacity) {
+    public RestaurantUpdateViewModel setCapacity(int capacity) {
         this.capacity = capacity;
         return this;
     }
