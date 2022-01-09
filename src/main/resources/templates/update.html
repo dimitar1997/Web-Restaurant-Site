@@ -3,10 +3,74 @@
 <head th:replace="/fragments/head::head"></head>
 <header th:replace="/fragments/navbar::header"></header>
 <body>
-<form th:object="${restaurantViewDetailsModel}"
-      th:href="@{/restaurant/update/{updateId}(updateId=*{id})}"
-      th:method="patch">
+<div class="container">
 
-</form>
+    <form
+            th:action="@{/restaurant/update/{updateId}(updateId=*{id})}"
+            method="post"
+            th:object="${restaurantViewDetailsModel}">
+        <div class="row">
+            <h1 class="titleForm">Update</h1>
+            <div class="mandatory-field"> Полетата с * са задължителни</div>
+        </div>
+
+        <div class="row">
+            <div class="section">
+                <label for="name" class="register-font">Name*</label><br>
+                <input class="field"
+                       th:field="*{name}"
+                       id="name"
+                       name="name"
+                       type="text"
+                       placeholder="Name">
+            </div>
+
+        </div>
+        <div class="row-description">
+            <div class="section">
+                <label for="description" class="register-font">Description*</label><br>
+                <textarea
+
+                        class="field-description"
+                        id="description"
+                        name="description"
+                        placeholder="Description"
+                        rows="4" cols="50"
+                        th:field="*{description}"></textarea>
+            </div>
+            <div class="row">
+                <label for="capacity" class="register-font">Capacity*</label><br>
+                <input
+                        th:field="*{capacity}"
+                        class="field-capacity"
+                        id="capacity"
+                        name="capacity"
+                        type="number"
+                        placeholder="Capacity">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="section">
+                <label for="address" class="register-font">Address*</label><br>
+                <input
+                        th:field="*{address}"
+                        class="field-address"
+                        id="address"
+                        name="address"
+                        type="text" min="5"
+                        placeholder="Address">
+                <p class="invalid-feedback errors alert alert-danger">
+                    Адреса е задължителен.
+                </p>
+            </div>
+        </div>
+        <div class="center-down-register">
+            <button class="index-button-register">
+                <input type="submit" class="register-submit-button" value="Update">
+            </button>
+        </div>
+    </form>
+</div>
 </body>
 </html>

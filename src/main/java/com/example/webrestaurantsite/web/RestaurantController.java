@@ -3,6 +3,7 @@ package com.example.webrestaurantsite.web;
 import com.example.webrestaurantsite.models.BidingModels.AddPictureBidingModel;
 import com.example.webrestaurantsite.models.BidingModels.AddRestaurantBidingModel;
 import com.example.webrestaurantsite.models.BidingModels.RestaurantUpdateBidingModel;
+import com.example.webrestaurantsite.models.service.RestaurantUpdateServiceModel;
 import com.example.webrestaurantsite.models.view.AllTownsViewModel;
 import com.example.webrestaurantsite.models.view.RestaurantArticleViewModel;
 import com.example.webrestaurantsite.models.view.RestaurantViewDetailsModel;
@@ -10,6 +11,7 @@ import com.example.webrestaurantsite.service.PictureService;
 import com.example.webrestaurantsite.service.RestaurantService;
 import com.example.webrestaurantsite.service.TownService;
 import com.example.webrestaurantsite.service.impl.UserDetailsImpl;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -29,11 +31,12 @@ public class RestaurantController {
     private final RestaurantService restaurantService;
     private final TownService townService;
     private final PictureService pictureService;
-
-    public RestaurantController(RestaurantService restaurantService, TownService townService, PictureService pictureService) {
+private final ModelMapper modelMapper;
+    public RestaurantController(RestaurantService restaurantService, TownService townService, PictureService pictureService, ModelMapper modelMapper) {
         this.restaurantService = restaurantService;
         this.townService = townService;
         this.pictureService = pictureService;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping("my-places")
@@ -84,19 +87,17 @@ public class RestaurantController {
 
 
     @GetMapping("/update/{updateId}")
-    public String updateRestaurant(@PathVariable Long updateId, Model model,
-                                   @AuthenticationPrincipal UserDetailsImpl currentUser) {
+    public String updateRestaurant(@PathVariable Long updateId, Model model) {
 
-       RestaurantViewDetailsModel restaurantViewDetailsModel = restaurantService.findRestaurantById(updateId);
-       model.addAttribute("restaurantViewDetailsModel", restaurantViewDetailsModel);
+        RestaurantViewDetailsModel restaurantViewDetailsModel = restaurantService.findRestaurantById(updateId);
+        model.addAttribute("restaurantViewDetailsModel", restaurantViewDetailsModel);
         return "update";
     }
 
-    @PatchMapping("/update/{updateId}")
+    @PostMapping("/update/{updateId}")
     public String updateRestaurant(@PathVariable Long updateId, @Valid RestaurantUpdateBidingModel restaurantUpdateBidingModel,
                                    BindingResult bindingResult,
                                    RedirectAttributes redirectAttributes) {
-
 
         if (bindingResult.hasErrors()) {
 
@@ -105,8 +106,12 @@ public class RestaurantController {
 
             return "redirect:/restaurant/update/" + updateId;
         }
+        RestaurantUpdateServiceModel restaurantUpdateServiceModel = modelMapper.map(restaurantUpdateBidingModel, RestaurantUpdateServiceModel.class);
+        restaurantUpdateServiceModel.setId(updateId);
+        restaurantService.update(restaurantUpdateServiceModel);
         return "redirect:/restaurant/details/" + updateId;
     }
+
 
     @ModelAttribute
     public AddRestaurantBidingModel addRestaurantBidingModel() {

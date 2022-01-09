@@ -218,6 +218,19 @@ select {
     border: none;
     background-color: #ffd600;
 }
+.center-down-search{
+    margin-left: 17%;
+    margin-top: 10%;
+}
+.index-button-search{
+    border: none;
+    height: 37px;
+    padding-left: 70px;
+    padding-right: 74px;
+    background: #FFD600;
+    border-radius: 28px;
+}
+
 
 .mandatory-field {
     margin-left: 30%;

@@ -2,6 +2,7 @@ package com.example.webrestaurantsite.service;
 
 import com.example.webrestaurantsite.models.BidingModels.AddPictureBidingModel;
 import com.example.webrestaurantsite.models.BidingModels.AddRestaurantBidingModel;
+import com.example.webrestaurantsite.models.service.RestaurantUpdateServiceModel;
 import com.example.webrestaurantsite.models.view.RestaurantArticleViewModel;
 import com.example.webrestaurantsite.models.view.RestaurantViewDetailsModel;
 import com.example.webrestaurantsite.service.impl.UserDetailsImpl;
@@ -18,4 +19,8 @@ public interface RestaurantService {
     List<RestaurantArticleViewModel> allRestaurant(UserDetailsImpl currentUser);
 
     RestaurantViewDetailsModel findRestaurantById(Long updateId);
+
+    void update(RestaurantUpdateServiceModel restaurantUpdateServiceModel);
+
+
 }

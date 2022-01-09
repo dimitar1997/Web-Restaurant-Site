@@ -4,20 +4,21 @@
 <head th:replace="/fragments/head::head"></head>
 <header th:replace="/fragments/navbar::header"></header>
 <body>
-<div class="section-home">
-    <label for="city" class="register-font">Cities</label><br>
-    <p class="mandatory-field-role"> Изберете град в който ще търсите за резервация.</p><br>
-    <select th:erorrclass="is-invalid" id="city" name="city"
-            aria-describedby="categoryHelpInline">
-        <option value="" selected>All cities</option>
-        <option th:each="c : ${allTowns}"
-                th:value="${c}" th:text="${c.getCity()}">
-        </option>
+<div class="section-home" >
+        <label for="city" class="register-font">Cities</label><br>
+        <p class="mandatory-field-role"> Изберете град в който ще търсите за резервация.</p><br>
+        <select th:erorrclass="is-invalid" id="city" name="city"
+                aria-describedby="categoryHelpInline">
+            <option value="" selected>All cities</option>
+            <option th:each="c : ${allTowns}"
+                    th:value="${c}" th:text="${c.getCity()}">
+            </option>
+        </select>
+        <small  id="categoryHelpInline" class="invalid-feedback bg-danger text-light rounded">
+            Трябва да изберете град.
+        </small>
 
-    </select>
-    <small id="categoryHelpInline" class="invalid-feedback bg-danger text-light rounded">
-        Трябва да изберете роля отговаряща на вашият профил.
-    </small>
+
 </div>
 </body>
 </html>
