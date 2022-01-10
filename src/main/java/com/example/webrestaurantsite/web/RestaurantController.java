@@ -2,6 +2,7 @@ package com.example.webrestaurantsite.web;
 
 import com.example.webrestaurantsite.models.BidingModels.AddPictureBidingModel;
 import com.example.webrestaurantsite.models.BidingModels.AddRestaurantBidingModel;
+import com.example.webrestaurantsite.models.BidingModels.ReserveBidingModel;
 import com.example.webrestaurantsite.models.BidingModels.RestaurantUpdateBidingModel;
 import com.example.webrestaurantsite.models.service.RestaurantUpdateServiceModel;
 import com.example.webrestaurantsite.models.view.AllTownsViewModel;
@@ -49,9 +50,11 @@ private final ModelMapper modelMapper;
 
     @GetMapping("/details/{restaurantId}")
     public String detailsRestaurant(@PathVariable Long restaurantId,
-                                    Model model) {
+                                    Model model, @AuthenticationPrincipal UserDetailsImpl currentUser, ReserveBidingModel reserveBidingModel ) {
         RestaurantViewDetailsModel restaurantViewDetailsModel = restaurantService.details(restaurantId);
+        model.addAttribute("isOwner", restaurantService.isOwner(currentUser.getUsername(), restaurantId));
         model.addAttribute("restaurantViewDetailsModel", restaurantViewDetailsModel);
+        model.addAttribute("reserveBidingModel", reserveBidingModel);
 
         return "restaurant-details";
     }
@@ -78,7 +81,7 @@ private final ModelMapper modelMapper;
         return "redirect:/";
     }
 
-    @DeleteMapping("/delete/{id}")
+    @GetMapping ("/delete/{id}")
     @PreAuthorize("@restaurantServiceImpl.isOwner(#principal.name, #id)")
     public String deleteRestaurant(@PathVariable Long id, Principal principal) {
         restaurantService.delete(id);

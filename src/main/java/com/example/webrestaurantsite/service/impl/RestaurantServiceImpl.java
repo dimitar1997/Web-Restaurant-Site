@@ -15,6 +15,7 @@ import com.example.webrestaurantsite.repository.PictureRepository;
 import com.example.webrestaurantsite.repository.RestaurantRepository;
 import com.example.webrestaurantsite.repository.TownRepository;
 import com.example.webrestaurantsite.repository.UserRepository;
+import com.example.webrestaurantsite.service.CloudinaryService;
 import com.example.webrestaurantsite.service.PictureService;
 import com.example.webrestaurantsite.service.RestaurantService;
 import com.example.webrestaurantsite.web.exceptions.ObjectNotFoundException;
@@ -34,15 +35,17 @@ public class RestaurantServiceImpl implements RestaurantService {
     private final TownRepository townRepository;
     private final PictureService pictureService;
     private final PictureRepository pictureRepository;
+    private final CloudinaryService cloudinaryService;
 
 
-    public RestaurantServiceImpl(RestaurantRepository restaurantRepository, UserRepository userRepository, ModelMapper modelMapper, TownRepository townRepository, PictureService pictureService, PictureRepository pictureRepository) {
+    public RestaurantServiceImpl(RestaurantRepository restaurantRepository, UserRepository userRepository, ModelMapper modelMapper, TownRepository townRepository, PictureService pictureService, PictureRepository pictureRepository, CloudinaryService cloudinaryService) {
         this.restaurantRepository = restaurantRepository;
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
         this.townRepository = townRepository;
         this.pictureService = pictureService;
         this.pictureRepository = pictureRepository;
+        this.cloudinaryService = cloudinaryService;
     }
 
 
@@ -71,6 +74,9 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public void delete(Long id) {
+        Picture picture = pictureRepository.findByRestaurantId(id);
+        cloudinaryService.delete(picture.getPublicId());
+        pictureRepository.delete(picture);
         restaurantRepository.deleteById(id);
     }
 
@@ -96,6 +102,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     public RestaurantViewDetailsModel findRestaurantById(Long updateId) {
         Restaurant restaurant = restaurantRepository.findById(updateId).orElseThrow(() -> new ObjectNotFoundException("Restaurant whit id " + updateId + " not found!"));
         return modelMapper.map(restaurant, RestaurantViewDetailsModel.class);
+
     }
 
     @Override
@@ -112,10 +119,10 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     }
 
-
+    @Override
     public boolean isOwner(String userName, Long id) {
         User user = userRepository.findByUsername(userName);
-        Restaurant restaurant = restaurantRepository.getById(id);
+        Restaurant restaurant = restaurantRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Restaurant not found!"));
         return user.getUsername().equals(restaurant.getOwner().getUsername());
     }
 }

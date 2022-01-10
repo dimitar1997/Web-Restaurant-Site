@@ -21,6 +21,7 @@ public interface RestaurantService {
     RestaurantViewDetailsModel findRestaurantById(Long updateId);
 
     void update(RestaurantUpdateServiceModel restaurantUpdateServiceModel);
+    boolean isOwner(String userName, Long id);
 
 
 }

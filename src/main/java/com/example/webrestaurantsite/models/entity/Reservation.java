@@ -1,5 +1,6 @@
 package com.example.webrestaurantsite.models.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -38,7 +39,7 @@ public class Reservation extends BasicEntity {
         return this;
     }
 
-    @ManyToOne
+    @ManyToOne()
     public Restaurant getRestaurant() {
         return restaurant;
     }

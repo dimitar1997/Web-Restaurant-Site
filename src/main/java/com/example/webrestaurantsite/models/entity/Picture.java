@@ -1,8 +1,6 @@
 package com.example.webrestaurantsite.models.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 @Entity
@@ -21,7 +19,7 @@ public class Picture extends BasicEntity {
         return this;
     }
 
-    @ManyToOne
+    @ManyToOne()
     public Restaurant getRestaurant() {
         return restaurant;
     }

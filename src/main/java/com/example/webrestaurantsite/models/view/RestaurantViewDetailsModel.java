@@ -11,6 +11,8 @@ public class RestaurantViewDetailsModel {
     private int capacity;
     private String city;
 
+
+
     public String getCity() {
         return city;
     }

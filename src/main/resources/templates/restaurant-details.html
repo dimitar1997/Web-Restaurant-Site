@@ -12,7 +12,7 @@
              class="offer card col-sm-2 col-md-3  col-lg-4 m-1 p-0">
 
             <div class="card">
-                <img class="card-img-top" th:src="*{getImgUrl()}"  alt="Image">
+                <img class="card-img-top" th:src="*{getImgUrl()}" alt="Image">
             </div>
 
             <ul class="offer-details list-group list-group-flush">
@@ -23,22 +23,52 @@
                     <div class="card-text"><span th:text="|Capacity left: *{capacity}|">• Capacity left</span></div>
                     <div class="card-text"><span th:text="|Town: *{city}|">• City</span></div>
                     <div class="card-text"><span th:text="|Address: *{address}|">• Address</span></div>
-                    <div class="row">
-                        <a class="nav-link" th:href="@{/restaurant/update/{updateId}(updateId=*{id})}">Update</a>
+                    <div class="form-group row" th:object="${reserveBidingModel}" }>
+                        <form th:action="@{/reservation/booked/{reserveId}(reserveId=*{restaurantId})}"
+                              th:method="post">
+                            <label for="created" class="card-text">Chose date to reserve</label>
+                            <div>
+                                <input th:field="*{dateTime}" th:erorrclass="is-invalid" type="date"
+                                       id="created"
+                                       name="dateTime"
+                                       aria-describedby="createdHelpInline">
+                                <small id="createdTimeHelpInline" class="invalid-feedback bg-danger text-light rounded">
+                                    Created date cannot be in the future.
+                                </small>
+                                <input
+                                        th:field="*{people}"
+                                        class="field-capacity"
+                                        id="capacity"
+                                        name="capacity"
+                                        type="number"
+                                        placeholder="Capacity">
+                                <input type="submit" class="btn btn-link" value="Reserve"/>
+                            </div>
+                        </form>
+
                     </div>
+                    <th:block th:if="${isOwner}">
+                        <div class="row">
+                            <a class="nav-link" th:href="@{/restaurant/update/{updateId}(updateId=*{id})}">Update</a>
+                        </div>
+                        <form th:action="@{/restaurant/delete/{id}(id=*{id})}" th:method="get">
+                            <input type="submit" class="btn btn-link" value="Delete"/>
+                        </form>
+
+                    </th:block>
 
 
             </ul>
-<!--            <div class="card-body">-->
-<!--                <div class="row">-->
-<!--                    <a class="btn btn-link" th:href="@{/offers/{id}/edit(id=*{id})}">Update</a>-->
-<!--                    <th:block th:if="*{canDelete}">-->
-<!--                        <form th:action="@{/offers/{id}(id=*{id})}" th:method="delete">-->
-<!--                            <input type="submit" class="btn btn-link" value="Delete"/>-->
-<!--                        </form>-->
-<!--                    </th:block>-->
-<!--                </div>-->
-<!--            </div>-->
+            <!--            <div class="card-body">-->
+            <!--                <div class="row">-->
+            <!--                    <a class="btn btn-link" th:href="@{/offers/{id}/edit(id=*{id})}">Update</a>-->
+            <!--                    <th:block th:if="*{canDelete}">-->
+            <!--                        <form th:action="@{/offers/{id}(id=*{id})}" th:method="delete">-->
+            <!--                            <input type="submit" class="btn btn-link" value="Delete"/>-->
+            <!--                        </form>-->
+            <!--                    </th:block>-->
+            <!--                </div>-->
+            <!--            </div>-->
         </div>
 
     </div>
