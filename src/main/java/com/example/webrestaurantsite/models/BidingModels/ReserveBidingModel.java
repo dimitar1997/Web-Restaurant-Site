@@ -5,11 +5,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+
 
 public class ReserveBidingModel {
     private Long restaurantId;
-    private LocalDateTime dateTime;
+    private LocalDate dateTime;
     private int people;
 
     @Positive
@@ -34,11 +35,11 @@ public class ReserveBidingModel {
 
     @FutureOrPresent
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    public LocalDateTime getDateTime() {
+    public LocalDate getDateTime() {
         return dateTime;
     }
 
-    public ReserveBidingModel setDateTime(LocalDateTime dateTime) {
+    public ReserveBidingModel setDateTime(LocalDate dateTime) {
         this.dateTime = dateTime;
         return this;
     }

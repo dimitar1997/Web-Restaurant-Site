@@ -13,6 +13,7 @@ public class AddRestaurantBidingModel {
 
 
 
+
     @NotNull
     public String getCity() {
         return city;

@@ -1,35 +1,47 @@
 package com.example.webrestaurantsite.models.entity;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+import javax.validation.constraints.Positive;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "reservations")
 public class Reservation extends BasicEntity {
-    private LocalDateTime dateTime;
+    private LocalDate dateTime;
     private User user;
     private Restaurant restaurant;
+    private int people;
+
+    @Positive
+    public int getPeople() {
+        return people;
+    }
+
+    public Reservation setPeople(int people) {
+        this.people = people;
+        return this;
+    }
 
     public Reservation() {
     }
 
     @FutureOrPresent
     @NotNull
-    public LocalDateTime getDateTime() {
+    public LocalDate getDateTime() {
         return dateTime;
     }
 
-    public Reservation setDateTime(LocalDateTime dateTime) {
+    public Reservation setDateTime(LocalDate dateTime) {
         this.dateTime = dateTime;
         return this;
     }
 
-    @ManyToOne
+    @ManyToOne()
     public User getUser() {
         return user;
     }

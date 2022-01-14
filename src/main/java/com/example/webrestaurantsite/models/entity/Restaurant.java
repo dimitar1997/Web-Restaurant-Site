@@ -2,6 +2,7 @@ package com.example.webrestaurantsite.models.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name = "restaurants")
@@ -12,7 +13,30 @@ public class Restaurant extends BasicEntity {
     private String address;
     private User owner;
     private int capacity;
+    private int leftCapacity;
     private Town city;
+
+    private List<Reservation> reservations;
+
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "restaurant")
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public Restaurant setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+        return this;
+    }
+
+    public int getLeftCapacity() {
+        return leftCapacity;
+    }
+
+    public Restaurant setLeftCapacity(int leftCapacity) {
+        this.leftCapacity = leftCapacity;
+        return this;
+    }
 
     @ManyToOne(fetch = FetchType.EAGER)
     @NotNull

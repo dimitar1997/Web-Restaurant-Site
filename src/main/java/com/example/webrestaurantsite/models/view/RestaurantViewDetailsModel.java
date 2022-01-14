@@ -8,10 +8,18 @@ public class RestaurantViewDetailsModel {
     private String name;
     private String description;
     private String address;
+    private int leftCapacity;
     private int capacity;
     private String city;
 
+    public int getLeftCapacity() {
+        return leftCapacity;
+    }
 
+    public RestaurantViewDetailsModel setLeftCapacity(int leftCapacity) {
+        this.leftCapacity = leftCapacity;
+        return this;
+    }
 
     public String getCity() {
         return city;

@@ -20,26 +20,27 @@
                     <div class="card-text"><span th:text="|Name: *{name}|">• Name</span></div>
 
                     <div class="card-text"><span th:text="|Description: *{description}|"> Description</span></div>
-                    <div class="card-text"><span th:text="|Capacity left: *{capacity}|">• Capacity left</span></div>
+                    <div class="card-text"><span th:text="|Capacity left: *{leftCapacity} / *{capacity} |">• Capacity left</span></div>
                     <div class="card-text"><span th:text="|Town: *{city}|">• City</span></div>
                     <div class="card-text"><span th:text="|Address: *{address}|">• Address</span></div>
                     <div class="form-group row" th:object="${reserveBidingModel}" }>
                         <form th:action="@{/reservation/booked/{reserveId}(reserveId=*{restaurantId})}"
                               th:method="post">
-                            <label for="created" class="card-text">Chose date to reserve</label>
+                            <label for="dateTime" class="card-text">Select a reservation date</label>
                             <div>
                                 <input th:field="*{dateTime}" th:erorrclass="is-invalid" type="date"
-                                       id="created"
+                                       id="dateTime"
                                        name="dateTime"
                                        aria-describedby="createdHelpInline">
                                 <small id="createdTimeHelpInline" class="invalid-feedback bg-danger text-light rounded">
                                     Created date cannot be in the future.
-                                </small>
+                                </small><br>
+                                <label for="people" class="card-text">People</label>
                                 <input
                                         th:field="*{people}"
                                         class="field-capacity"
-                                        id="capacity"
-                                        name="capacity"
+                                        id="people"
+                                        name="people"
                                         type="number"
                                         placeholder="Capacity">
                                 <input type="submit" class="btn btn-link" value="Reserve"/>
@@ -59,16 +60,6 @@
 
 
             </ul>
-            <!--            <div class="card-body">-->
-            <!--                <div class="row">-->
-            <!--                    <a class="btn btn-link" th:href="@{/offers/{id}/edit(id=*{id})}">Update</a>-->
-            <!--                    <th:block th:if="*{canDelete}">-->
-            <!--                        <form th:action="@{/offers/{id}(id=*{id})}" th:method="delete">-->
-            <!--                            <input type="submit" class="btn btn-link" value="Delete"/>-->
-            <!--                        </form>-->
-            <!--                    </th:block>-->
-            <!--                </div>-->
-            <!--            </div>-->
         </div>
 
     </div>

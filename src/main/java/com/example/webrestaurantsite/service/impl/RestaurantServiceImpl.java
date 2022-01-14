@@ -64,6 +64,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         Restaurant restaurant = modelMapper.map(addRestaurantServiceModel, Restaurant.class);
         User owner = userRepository.findByUsername(currentUser.getUserIdentifier());
         restaurant.setOwner(owner);
+        restaurant.setLeftCapacity(addRestaurantBidingModel.getCapacity());
         Town town = townRepository.findByCity(addRestaurantServiceModel.getCity());
         restaurant.setCity(town);
 

@@ -59,6 +59,7 @@ private final ModelMapper modelMapper;
         return "restaurant-details";
     }
 
+
     @GetMapping("/add")
     public String add(Model model) {
 

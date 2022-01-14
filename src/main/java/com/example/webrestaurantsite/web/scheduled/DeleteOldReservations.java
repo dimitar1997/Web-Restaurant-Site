@@ -4,6 +4,7 @@ import com.example.webrestaurantsite.repository.ReservationRepository;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Component
@@ -16,7 +17,7 @@ public class DeleteOldReservations {
 
     @Scheduled(cron = "0 0 0 * * ?")
     public void deleteOldReservation() {
-        LocalDateTime localDateTime = LocalDateTime.now();
-        reservationRepository.deleteByDateTimeLessThan(localDateTime);
+        LocalDate localDate = LocalDate.now();
+        reservationRepository.deleteByDateTimeLessThan(localDate);
     }
 }
