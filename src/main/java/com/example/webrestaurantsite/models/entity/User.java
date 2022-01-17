@@ -4,6 +4,7 @@ import com.example.webrestaurantsite.models.entity.enums.RoleEnums;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -22,7 +23,7 @@ public class User extends BasicEntity {
     public User() {
     }
 
-    @NotNull
+    @NotBlank
     public String getFirstName() {
         return firstName;
     }
@@ -41,7 +42,7 @@ public class User extends BasicEntity {
         return this;
     }
 
-    @NotNull
+    @NotBlank
     public String getLastName() {
         return lastName;
     }
@@ -52,6 +53,7 @@ public class User extends BasicEntity {
     }
 
     @Email
+    @NotBlank
     public String getEmail() {
         return email;
     }
@@ -61,7 +63,7 @@ public class User extends BasicEntity {
         return this;
     }
 
-    @NotNull
+    @NotBlank
     @Column(unique = true)
     @Size(min = 5, max = 20)
     public String getUsername() {
@@ -73,6 +75,7 @@ public class User extends BasicEntity {
         return this;
     }
     @Column()
+    @NotBlank
     public String getPassword() {
         return password;
     }
@@ -83,6 +86,7 @@ public class User extends BasicEntity {
     }
 
     @Enumerated
+    @NotBlank
     public RoleEnums getRole() {
         return role;
     }

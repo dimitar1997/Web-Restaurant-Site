@@ -1,6 +1,6 @@
 package com.example.webrestaurantsite.models.BidingModels;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
@@ -11,10 +11,7 @@ public class AddRestaurantBidingModel {
     private int capacity;
     private String city;
 
-
-
-
-    @NotNull
+    @NotBlank
     public String getCity() {
         return city;
     }
@@ -24,7 +21,7 @@ public class AddRestaurantBidingModel {
         return this;
     }
 
-    @NotNull
+    @NotBlank
     public String getName() {
         return name;
     }
@@ -33,6 +30,7 @@ public class AddRestaurantBidingModel {
         this.name = name;
         return this;
     }
+
     @Size(min = 10)
     public String getDescription() {
         return description;
@@ -43,7 +41,7 @@ public class AddRestaurantBidingModel {
         return this;
     }
 
-    @NotNull
+    @NotBlank
     public String getAddress() {
         return address;
     }

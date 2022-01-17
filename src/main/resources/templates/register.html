@@ -19,10 +19,14 @@
             <div class="section">
                 <label for="firstName" class="register-font">First Name*</label><br>
                 <input class="field"
-                        id="firstName"
-                        th:field="*{firstName}"
-                        type="text"
-                placeholder="First Name">
+                       id="firstName"
+                       th:field="*{firstName}"
+                       type="text"
+                       placeholder="First Name"
+                       th:errorclass="is-invalid">
+                <p class="invalid-feedback errors alert alert-danger">
+                    Полето е задължително!
+                </p>
             </div>
             <div class="section">
                 <label for="middleName" class="register-font">Middle Name</label><br>
@@ -34,25 +38,29 @@
             </div>
             <div class="section">
                 <label for="lastName" class="register-font">Last Name*</label><br>
-                <input  class="field"
-                        id="lastName"
-                        th:field="*{lastName}"
-                        type="text"
-                        placeholder="Last Name">
+                <input class="field"
+                       id="lastName"
+                       th:field="*{lastName}"
+                       type="text"
+                       placeholder="Last Name"
+                       th:errorclass="is-invalid">
+                <p class="invalid-feedback errors alert alert-danger">
+                    Полето е задължително!
+                </p>
             </div>
         </div>
         <div class="row">
             <div class="section">
                 <label for="username" class="register-font">Username*</label><br>
-                <input  min="5" max="20"
-                        class="field"
-                        id="username"
-                        th:field="*{username}"
-                        th:errorclass="is-invalid"
-                        type="text"
-                        placeholder="Username">
-                <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="invalid-feedback errors alert alert-danger">
-                    Username is required.
+                <input min="5" max="20"
+                       class="field"
+                       id="username"
+                       th:field="*{username}"
+                       th:errorclass="is-invalid"
+                       type="text"
+                       placeholder="Username">
+                <p class="invalid-feedback errors alert alert-danger">
+                    Полето е задължително и трябва да бъде между 5 и 20 симвова!
                 </p>
             </div>
             <div class="section">
@@ -62,7 +70,11 @@
                         id="email"
                         th:field="*{email}"
                         type="text"
-                        placeholder="Email">
+                        placeholder="Email"
+                        th:errorclass="is-invalid">
+                <p class="invalid-feedback errors alert alert-danger">
+                    Полето е задължително!
+                </p>
             </div>
         </div>
         <div class="row">
@@ -72,11 +84,12 @@
             <div class="section">
                 <label for="password" class="register-font">Password*</label><br>
                 <input
-                       class="field"
-                       id="password"
-                       th:field="*{password}"
-                       type="password" min="5" max="20"
-                       placeholder="Password">
+                        class="field"
+                        id="password"
+                        th:field="*{password}"
+                        type="password" min="5" max="20"
+                        placeholder="Password"
+                        th:errorclass="is-invalid">
                 <p class="invalid-feedback errors alert alert-danger">
                     Паролата е задължителна.
                 </p>
@@ -87,7 +100,8 @@
                        id="confirmPassword"
                        th:field="*{confirmPassword}"
                        type="password" min="5" max="20"
-                       placeholder="confirmPassword">
+                       placeholder="confirmPassword"
+                       th:errorclass="is-invalid">
             </div>
         </div>
         <div class="section">
@@ -109,7 +123,6 @@
         <div class="center-down-register">
             <button class="index-button-register">
                 <input type="submit" class="register-submit-button" value="Register">
-               <!-- <a class="nav-link-login-user" >Register</a> -->
             </button>
         </div>
 

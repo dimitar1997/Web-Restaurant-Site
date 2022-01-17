@@ -1,6 +1,7 @@
 package com.example.webrestaurantsite.models.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 
@@ -25,6 +26,7 @@ public class Town extends BasicEntity {
     }
 
     @Column(nullable = false, unique = true)
+
     public String getCity() {
         return city;
     }

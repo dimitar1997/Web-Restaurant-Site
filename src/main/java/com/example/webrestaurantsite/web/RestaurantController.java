@@ -32,7 +32,8 @@ public class RestaurantController {
     private final RestaurantService restaurantService;
     private final TownService townService;
     private final PictureService pictureService;
-private final ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
+
     public RestaurantController(RestaurantService restaurantService, TownService townService, PictureService pictureService, ModelMapper modelMapper) {
         this.restaurantService = restaurantService;
         this.townService = townService;
@@ -50,7 +51,7 @@ private final ModelMapper modelMapper;
 
     @GetMapping("/details/{restaurantId}")
     public String detailsRestaurant(@PathVariable Long restaurantId,
-                                    Model model, @AuthenticationPrincipal UserDetailsImpl currentUser, ReserveBidingModel reserveBidingModel ) {
+                                    Model model, @AuthenticationPrincipal UserDetailsImpl currentUser, ReserveBidingModel reserveBidingModel) {
         RestaurantViewDetailsModel restaurantViewDetailsModel = restaurantService.details(restaurantId);
         model.addAttribute("isOwner", restaurantService.isOwner(currentUser.getUsername(), restaurantId));
         model.addAttribute("restaurantViewDetailsModel", restaurantViewDetailsModel);
@@ -62,27 +63,31 @@ private final ModelMapper modelMapper;
 
     @GetMapping("/add")
     public String add(Model model) {
-
-        List<AllTownsViewModel> allTownsViewModels = townService.getAllTowns();
-        model.addAttribute("allTowns", allTownsViewModels);
+        if (!model.containsAttribute("addRestaurantBidingModel") && !model.containsAttribute("addPictureBidingModel")) {
+            model.addAttribute("addRestaurantBidingModel", new AddRestaurantBidingModel())
+                    .addAttribute("addPictureBidingModel", new AddPictureBidingModel())
+                    .addAttribute("allTowns", townService.getAllTowns());
+        }
         return "add-restaurant";
     }
 
-    @PostMapping(value = "/add")
-    public String add(@Valid AddRestaurantBidingModel addRestaurantBidingModel, AddPictureBidingModel addPictureBidingModel,
-                      BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                      @AuthenticationPrincipal UserDetailsImpl currentUser) throws IOException {
+    @PostMapping("/add")
+    public String errorAdd(@Valid AddRestaurantBidingModel addRestaurantBidingModel, AddPictureBidingModel addPictureBidingModel,
+                           BindingResult bindingResult, RedirectAttributes redirectAttributes,
+                           @AuthenticationPrincipal UserDetailsImpl currentUser) throws IOException {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addRestaurantBidingModel", addRestaurantBidingModel)
                     .addFlashAttribute("addPictureBidingModel", addPictureBidingModel)
-                    .addFlashAttribute("org.springframework.validation.BindingResult.addRestaurantBidingModel", bindingResult);
-            return "redirect:/add";
+                    .addFlashAttribute("org.springframework.validation.BindingResult.addRestaurantBidingModel", bindingResult)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.addPictureBidingModel", bindingResult)
+                    .addFlashAttribute("allTowns", townService.getAllTowns());
+            return "redirect:/restaurant/add";
         }
         restaurantService.addRestaurant(addRestaurantBidingModel, currentUser, addPictureBidingModel);
         return "redirect:/";
     }
 
-    @GetMapping ("/delete/{id}")
+    @GetMapping("/delete/{id}")
     @PreAuthorize("@restaurantServiceImpl.isOwner(#principal.name, #id)")
     public String deleteRestaurant(@PathVariable Long id, Principal principal) {
         restaurantService.delete(id);
@@ -114,17 +119,6 @@ private final ModelMapper modelMapper;
         restaurantUpdateServiceModel.setId(updateId);
         restaurantService.update(restaurantUpdateServiceModel);
         return "redirect:/restaurant/details/" + updateId;
-    }
-
-
-    @ModelAttribute
-    public AddRestaurantBidingModel addRestaurantBidingModel() {
-        return new AddRestaurantBidingModel();
-    }
-
-    @ModelAttribute
-    public AddPictureBidingModel addPictureBidingModel() {
-        return new AddPictureBidingModel();
     }
 
 }

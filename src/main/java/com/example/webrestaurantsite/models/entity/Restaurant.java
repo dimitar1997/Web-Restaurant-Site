@@ -1,7 +1,10 @@
 package com.example.webrestaurantsite.models.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -49,7 +52,7 @@ public class Restaurant extends BasicEntity {
         return this;
     }
 
-    @NotNull
+    @Positive
     public int getCapacity() {
         return capacity;
     }
@@ -71,6 +74,8 @@ public class Restaurant extends BasicEntity {
 
 
     @Column(columnDefinition = "TEXT")
+    @NotBlank
+    @Size(min = 10)
     public String getDescription() {
         return description;
     }
@@ -81,6 +86,7 @@ public class Restaurant extends BasicEntity {
     }
 
     @Column
+    @NotNull
     public String getAddress() {
         return address;
     }

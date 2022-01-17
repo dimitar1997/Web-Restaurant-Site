@@ -23,7 +23,7 @@ public class RegisterBidingModel {
     public RegisterBidingModel() {
     }
 
-    @NotNull
+    @NotBlank
     public String getConfirmPassword() {
         return confirmPassword;
     }
@@ -33,7 +33,7 @@ public class RegisterBidingModel {
         return this;
     }
 
-    @NotNull
+    @NotBlank
     public String firstName() {
         return firstName;
     }
@@ -52,7 +52,7 @@ public class RegisterBidingModel {
         return this;
     }
 
-    @NotNull
+    @NotBlank
     public String getLastName() {
         return lastName;
     }
@@ -75,7 +75,7 @@ public class RegisterBidingModel {
 
     @NotBlank
     @Size(min = 4, max = 20)
-    @UniqueUserName
+    @UniqueUserName(message = "Полето е задължително и трябва да бъде между 5 и 20 символа!")
     public String getUsername() {
         return username;
     }
@@ -96,7 +96,7 @@ public class RegisterBidingModel {
         return this;
     }
 
-    @NotNull
+    @NotBlank
     public String getFirstName() {
         return firstName;
     }
