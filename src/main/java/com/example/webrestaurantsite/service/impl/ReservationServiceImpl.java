@@ -66,6 +66,7 @@ public class ReservationServiceImpl implements ReservationService {
             ReservationCustomViewModel rModel = new ReservationCustomViewModel();
             rModel.setId(r.getId());
             Picture picture = pictureRepository.findByRestaurantId(r.getRestaurant().getId());
+            rModel.setName(r.getRestaurant().getName());
             rModel.setImgUrl(picture.getImageUrl());
             rvdm.add(rModel);
         }

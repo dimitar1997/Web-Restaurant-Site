@@ -3,7 +3,7 @@ package com.example.webrestaurantsite.models.view;
 public class ReservationCustomViewModel {
     private Long id;
     private String imgUrl;
-    private String nameRestaurant;
+    private String name;
 
     public Long getId() {
         return id;
@@ -23,12 +23,12 @@ public class ReservationCustomViewModel {
         return this;
     }
 
-    public String getNameRestaurant() {
-        return nameRestaurant;
+    public String getName() {
+        return name;
     }
 
-    public ReservationCustomViewModel setNameRestaurant(String nameRestaurant) {
-        this.nameRestaurant = nameRestaurant;
+    public ReservationCustomViewModel setName(String name) {
+        this.name = name;
         return this;
     }
 }

@@ -33,6 +33,9 @@ cloudinary:
   api-secret: sJuxO9vfTtZ98pqHsteVyhzbnVk
   cloud-name: dln312h3o
 
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
 
 
   servlet:

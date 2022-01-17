@@ -7,7 +7,7 @@
 <div th:each="all : ${allCurrentUserReservations}" th:object="${all}" class="all-classes-container style-photo">
     <article>
         <img class="photoView" th:src="*{imgUrl}">
-        <p th:text="*{nameRestaurant}"></p>
+        <p th:text="*{name}"></p>
         <a class="nav-link" th:href="@{/reservation/my-reservations-details/{reservationId}(reservationId=*{id})}">Details</a>
     </article>
 

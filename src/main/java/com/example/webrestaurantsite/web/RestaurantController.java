@@ -72,14 +72,14 @@ public class RestaurantController {
     }
 
     @PostMapping("/add")
-    public String errorAdd(@Valid AddRestaurantBidingModel addRestaurantBidingModel, AddPictureBidingModel addPictureBidingModel,
+    public String errorAdd(@Valid AddRestaurantBidingModel addRestaurantBidingModel,
                            BindingResult bindingResult, RedirectAttributes redirectAttributes,
+                           AddPictureBidingModel addPictureBidingModel,
                            @AuthenticationPrincipal UserDetailsImpl currentUser) throws IOException {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addRestaurantBidingModel", addRestaurantBidingModel)
                     .addFlashAttribute("addPictureBidingModel", addPictureBidingModel)
                     .addFlashAttribute("org.springframework.validation.BindingResult.addRestaurantBidingModel", bindingResult)
-                    .addFlashAttribute("org.springframework.validation.BindingResult.addPictureBidingModel", bindingResult)
                     .addFlashAttribute("allTowns", townService.getAllTowns());
             return "redirect:/restaurant/add";
         }
@@ -89,7 +89,7 @@ public class RestaurantController {
 
     @GetMapping("/delete/{id}")
     @PreAuthorize("@restaurantServiceImpl.isOwner(#principal.name, #id)")
-    public String deleteRestaurant(@PathVariable Long id, Principal principal) {
+    public String deleteRestaurant(@PathVariable Long id) {
         restaurantService.delete(id);
         return "redirect:/";
     }

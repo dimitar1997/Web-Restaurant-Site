@@ -18,10 +18,10 @@
         <li class="group-background">
           <div class="card-text"><span th:text="|Здравейте *{firstName} *{lastName}, вие имате резервация  в *{getNameRestaurant()} за *{people} на *{date}|"> Description</span></div>
 
-          <form th:action="@{/reservation/cancel/{reservationId}(reservationId=*{id})}" th:method="post">
-            <input type="submit" class="btn btn-link" value="Cancel"/>
-          </form>
       </ul>
+      <form th:action="@{/reservation/cancel/{reservationId}(reservationId=*{id})}" th:method="post">
+        <input type="submit" class="btn btn-link" value="Cancel"/>
+      </form>
     </div>
 
   </div>
