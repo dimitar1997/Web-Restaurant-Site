@@ -7,14 +7,14 @@ public class ReservationViewDetailsModel {
     private String firstName;
     private String lastName;
     private String date;
-    private int people;
+    private int peopleCount;
 
-    public int getPeople() {
-        return people;
+    public int getPeopleCount() {
+        return peopleCount;
     }
 
-    public ReservationViewDetailsModel setPeople(int people) {
-        this.people = people;
+    public ReservationViewDetailsModel setPeopleCount(int peopleCount) {
+        this.peopleCount = peopleCount;
         return this;
     }
 

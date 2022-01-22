@@ -86,7 +86,7 @@ public class User extends BasicEntity {
     }
 
     @Enumerated
-    @NotBlank
+    @NotNull
     public RoleEnums getRole() {
         return role;
     }

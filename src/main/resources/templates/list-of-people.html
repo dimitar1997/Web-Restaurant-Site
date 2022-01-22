@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/head::head"></head>
+<header th:replace="/fragments/navbar::header"></header>
+<body >
+<ol th:each="all : ${listOfPeopleViewModels}">
+    <div >
+        <li>
+            <span th:text="|*{all.fullName} резервира за *{all.peopleCount} човека.|"> Description</span>
+        </li>
+
+    </div>
+</ol>
+</body>
+</html>

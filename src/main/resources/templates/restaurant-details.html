@@ -20,12 +20,13 @@
                     <div class="card-text"><span th:text="|Name: *{name}|">• Name</span></div>
 
                     <div class="card-text"><span th:text="|Description: *{description}|"> Description</span></div>
-                    <div class="card-text"><span th:text="|Capacity left: *{leftCapacity} / *{capacity} |">• Capacity left</span></div>
+                    <div class="card-text"><span th:text="|Capacity: *{capacity} |">• Capacity</span></div>
                     <div class="card-text"><span th:text="|Town: *{city}|">• City</span></div>
                     <div class="card-text"><span th:text="|Address: *{address}|">• Address</span></div>
                     <div class="form-group row" th:object="${reserveBidingModel}" }>
                         <form th:action="@{/reservation/booked/{reserveId}(reserveId=*{restaurantId})}"
-                              th:method="post">
+                              th:method="post"
+                        th:object="${reserveBidingModel}">
                             <label for="dateTime" class="card-text">Select a reservation date</label>
                             <div>
                                 <input th:field="*{dateTime}" th:erorrclass="is-invalid" type="date"
@@ -33,18 +34,22 @@
                                        name="dateTime"
                                        aria-describedby="createdHelpInline">
                                 <small id="createdTimeHelpInline" class="invalid-feedback bg-danger text-light rounded">
-                                    Created date cannot be in the future.
+                                    Created date cannot be in the past.
                                 </small><br>
-                                <label for="people" class="card-text">People</label>
-                                <input
-                                        th:field="*{people}"
-                                        class="field-capacity"
-                                        id="people"
-                                        name="people"
-                                        type="number"
-                                        placeholder="Capacity">
-                                <input type="submit" class="btn btn-link" value="Reserve"/>
+
+                                    <label for="peopleCount" class="card-text">People</label>
+                                    <input
+                                            th:field="*{peopleCount}"
+                                            class="field-capacity"
+                                            id="peopleCount"
+                                            name="peopleCount"
+                                            type="number"
+                                            placeholder="Capacity">
+                                    <input type="submit" class="btn btn-link" value="Reserve"/>
+
+
                             </div>
+
                         </form>
 
                     </div>
@@ -55,10 +60,7 @@
                         <form th:action="@{/restaurant/delete/{id}(id=*{id})}" th:method="get">
                             <input type="submit" class="btn btn-link" value="Delete"/>
                         </form>
-
                     </th:block>
-
-
             </ul>
         </div>
 

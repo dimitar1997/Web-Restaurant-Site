@@ -9,6 +9,8 @@
 <img  class="photoView" th:src="*{imageUrl}" >
     <p th:text="*{name}"></p>
     <a  th:href="@{/restaurant/details/{restaurantId}(restaurantId=*{id})}">Details</a>
+    <br>
+    <a th:href="@{/restaurant/check-by-date/{restaurantId}(restaurantId=*{id})}">Check reservations by date</a>
 </article>
 
 </div>

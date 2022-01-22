@@ -9,6 +9,7 @@ import com.example.webrestaurantsite.models.entity.User;
 import com.example.webrestaurantsite.models.service.AddPictureServiceModel;
 import com.example.webrestaurantsite.models.service.AddRestaurantServiceModel;
 import com.example.webrestaurantsite.models.service.RestaurantUpdateServiceModel;
+import com.example.webrestaurantsite.models.view.ListOfPeopleViewModel;
 import com.example.webrestaurantsite.models.view.RestaurantArticleViewModel;
 import com.example.webrestaurantsite.models.view.RestaurantViewDetailsModel;
 import com.example.webrestaurantsite.repository.PictureRepository;
@@ -64,7 +65,6 @@ public class RestaurantServiceImpl implements RestaurantService {
         Restaurant restaurant = modelMapper.map(addRestaurantServiceModel, Restaurant.class);
         User owner = userRepository.findByUsername(currentUser.getUserIdentifier());
         restaurant.setOwner(owner);
-        restaurant.setLeftCapacity(addRestaurantBidingModel.getCapacity());
         Town town = townRepository.findByCity(addRestaurantServiceModel.getCity());
         restaurant.setCity(town);
 
@@ -126,4 +126,5 @@ public class RestaurantServiceImpl implements RestaurantService {
         Restaurant restaurant = restaurantRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Restaurant not found!"));
         return user.getUsername().equals(restaurant.getOwner().getUsername());
     }
+
 }

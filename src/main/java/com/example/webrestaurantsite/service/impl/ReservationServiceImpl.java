@@ -6,6 +6,7 @@ import com.example.webrestaurantsite.models.entity.Reservation;
 import com.example.webrestaurantsite.models.entity.Restaurant;
 import com.example.webrestaurantsite.models.entity.User;
 import com.example.webrestaurantsite.models.service.ReserveServiceModel;
+import com.example.webrestaurantsite.models.view.ListOfPeopleViewModel;
 import com.example.webrestaurantsite.models.view.ReservationCustomViewModel;
 import com.example.webrestaurantsite.models.view.ReservationViewDetailsModel;
 import com.example.webrestaurantsite.repository.PictureRepository;
@@ -17,6 +18,8 @@ import com.example.webrestaurantsite.web.exceptions.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -49,9 +52,8 @@ public class ReservationServiceImpl implements ReservationService {
         reservation.setDateTime(reserveServiceModel.getDateTime());
         reservation.setUser(userRepository.findByUsername(currentUser.getUserIdentifier()));
         Restaurant restaurant = restaurantRepository.findById(reserveBidingModel.getRestaurantId()).orElseThrow(() -> new ObjectNotFoundException("Restaurant not found"));
-        restaurant.setLeftCapacity(restaurant.getLeftCapacity() - reserveServiceModel.getPeople());
         reservation.setRestaurant(restaurant);
-        reservation.setPeople(reserveServiceModel.getPeople());
+        reservation.setPeopleCount(reserveServiceModel.getPeople());
         restaurantRepository.save(restaurant);
         reservationRepository.save(reservation);
 
@@ -85,7 +87,7 @@ public class ReservationServiceImpl implements ReservationService {
         rModel.setNameRestaurant(reservation.getRestaurant().getName());
         Picture picture = pictureRepository.findByRestaurantId(reservation.getRestaurant().getId());
         rModel.setImgUrl(picture.getImageUrl());
-        rModel.setPeople(reservation.getPeople());
+        rModel.setPeopleCount(reservation.getPeopleCount());
         return rModel;
     }
 
@@ -94,4 +96,31 @@ public class ReservationServiceImpl implements ReservationService {
         Reservation reservation = reservationRepository.findById(reservationId).orElseThrow(() -> new ObjectNotFoundException("Reservation whit " + reservationId + " not found!"));
         reservationRepository.delete(reservation);
     }
+
+    @Override
+    public boolean isFull(LocalDate dateTime, Long restaurantId) {
+        Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow(() -> new ObjectNotFoundException("Restaurant whit " + restaurantId + " not found!"));
+        if (reservationRepository.findAllByDateTime(dateTime).size() >= restaurant.getCapacity()){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public List<ListOfPeopleViewModel> loadListOfPeople(Long restaurantId) {
+        Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow(() -> new ObjectNotFoundException("Restaurant whit " + restaurantId + " not found!"));
+       List<Reservation> reservations = reservationRepository.findAllByRestaurant(restaurant);
+
+       List<ListOfPeopleViewModel> listOfPeopleViewModels = new ArrayList<>();
+
+        for (Reservation r: reservations) {
+            ListOfPeopleViewModel listOfPeopleViewModel = new ListOfPeopleViewModel();
+            listOfPeopleViewModel.setFullName(r.getUser().getFirstName() + " " + r.getUser().getLastName());
+            listOfPeopleViewModel.setPeopleCount(r.getPeopleCount());
+            listOfPeopleViewModels.add(listOfPeopleViewModel);
+        }
+        return listOfPeopleViewModels;
+    }
+
+
 }

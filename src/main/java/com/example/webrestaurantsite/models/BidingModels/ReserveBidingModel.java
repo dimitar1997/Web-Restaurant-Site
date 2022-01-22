@@ -11,11 +11,11 @@ import java.time.LocalDate;
 public class ReserveBidingModel {
     private Long restaurantId;
     private LocalDate dateTime;
-    private int people;
+    private int peopleCount;
 
     @Positive
-    public int getPeople() {
-        return people;
+    public int getPeopleCount() {
+        return peopleCount;
     }
 
     @NotNull
@@ -28,8 +28,8 @@ public class ReserveBidingModel {
         return this;
     }
 
-    public ReserveBidingModel setPeople(int people) {
-        this.people = people;
+    public ReserveBidingModel setPeopleCount(int peopleCount) {
+        this.peopleCount = peopleCount;
         return this;
     }
 

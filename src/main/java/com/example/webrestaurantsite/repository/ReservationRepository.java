@@ -14,6 +14,12 @@ import java.util.Optional;
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
     List<Reservation> findAllByUserOrderByDateTimeAsc(User user);
+
+    List<Reservation> findAllByDateTime(LocalDate dateTime);
+
+    List<Reservation> findAllByRestaurant(Restaurant restaurant);
+
     void deleteByDateTimeLessThan(LocalDate dateTime);
+
     Optional<Reservation> findById(Long id);
 }

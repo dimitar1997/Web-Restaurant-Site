@@ -8,6 +8,7 @@ import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "reservations")
@@ -15,15 +16,25 @@ public class Reservation extends BasicEntity {
     private LocalDate dateTime;
     private User user;
     private Restaurant restaurant;
-    private int people;
+    private int peopleCount;
 
-    @Positive
-    public int getPeople() {
-        return people;
+    @ManyToOne
+    public User getUser() {
+        return user;
     }
 
-    public Reservation setPeople(int people) {
-        this.people = people;
+    public Reservation setUser(User user) {
+        this.user = user;
+        return this;
+    }
+
+    @Positive
+    public int getPeopleCount() {
+        return peopleCount;
+    }
+
+    public Reservation setPeopleCount(int peopleCount) {
+        this.peopleCount = peopleCount;
         return this;
     }
 
@@ -41,15 +52,6 @@ public class Reservation extends BasicEntity {
         return this;
     }
 
-    @ManyToOne()
-    public User getUser() {
-        return user;
-    }
-
-    public Reservation setUser(User user) {
-        this.user = user;
-        return this;
-    }
 
     @ManyToOne()
     public Restaurant getRestaurant() {

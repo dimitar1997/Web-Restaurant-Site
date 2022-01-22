@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/head::head"></head>
+<header th:replace="/fragments/navbar::header"></header>
+<body>
+<form th:action="@{/restaurant/check-by-date/{restaurantId}(restaurantId=${currentId})}"
+      th:method="post"
+      th:object="${checkByDateBidingModel}">
+    <label for="localDate" class="card-text">Select a reservation date</label>
+    <div>
+        <input th:field="*{localDate}" th:erorrclass="is-invalid" type="date"
+               id="localDate"
+               name="localDate"
+               aria-describedby="createdHelpInline">
+        <small id="createdTimeHelpInline" class="invalid-feedback bg-danger text-light rounded">
+            Created date cannot be in the past or empty.
+        </small><br>
+        <input type="submit" class="btn btn-link" value="Check reservations for the date"/>
+    </div>
+
+</form>
+</body>
+</html>

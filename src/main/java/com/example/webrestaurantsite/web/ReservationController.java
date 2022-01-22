@@ -40,11 +40,15 @@ public class ReservationController {
     public String bookDate(@PathVariable Long restaurantId, @Valid ReserveBidingModel reserveBidingModel,
                            BindingResult bindingResult, RedirectAttributes redirectAttributes,
                            @AuthenticationPrincipal UserDetailsImpl currentUser) {
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors() || reservationService.isFull(reserveBidingModel.getDateTime(), restaurantId)) {
             redirectAttributes.addFlashAttribute("reserveBidingModel", reserveBidingModel)
+                    .addFlashAttribute("isFull", true)
                     .addFlashAttribute("org.springframework.validation.BindingResult.reserveBidingModel", bindingResult);
+
+
             return "redirect:/restaurant/details/" + restaurantId;
         }
+
         reserveBidingModel.setRestaurantId(restaurantId);
         reservationService.makeReserve(currentUser, reserveBidingModel);
         return "redirect:/reservation/my-reservations";
@@ -63,5 +67,6 @@ public class ReservationController {
         reservationService.cancelReservation(reservationId);
         return "redirect:/reservation/my-reservations";
     }
+
 
 }

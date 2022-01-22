@@ -1,14 +1,11 @@
 package com.example.webrestaurantsite.web;
 
-import com.example.webrestaurantsite.models.BidingModels.AddPictureBidingModel;
-import com.example.webrestaurantsite.models.BidingModels.AddRestaurantBidingModel;
-import com.example.webrestaurantsite.models.BidingModels.ReserveBidingModel;
-import com.example.webrestaurantsite.models.BidingModels.RestaurantUpdateBidingModel;
+import com.example.webrestaurantsite.models.BidingModels.*;
 import com.example.webrestaurantsite.models.service.RestaurantUpdateServiceModel;
-import com.example.webrestaurantsite.models.view.AllTownsViewModel;
+import com.example.webrestaurantsite.models.view.ListOfPeopleViewModel;
 import com.example.webrestaurantsite.models.view.RestaurantArticleViewModel;
 import com.example.webrestaurantsite.models.view.RestaurantViewDetailsModel;
-import com.example.webrestaurantsite.service.PictureService;
+import com.example.webrestaurantsite.service.ReservationService;
 import com.example.webrestaurantsite.service.RestaurantService;
 import com.example.webrestaurantsite.service.TownService;
 import com.example.webrestaurantsite.service.impl.UserDetailsImpl;
@@ -23,7 +20,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.IOException;
-import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -31,14 +27,14 @@ import java.util.List;
 public class RestaurantController {
     private final RestaurantService restaurantService;
     private final TownService townService;
-    private final PictureService pictureService;
     private final ModelMapper modelMapper;
+    private final ReservationService reservationService;
 
-    public RestaurantController(RestaurantService restaurantService, TownService townService, PictureService pictureService, ModelMapper modelMapper) {
+    public RestaurantController(RestaurantService restaurantService, TownService townService, ModelMapper modelMapper, ReservationService reservationService) {
         this.restaurantService = restaurantService;
         this.townService = townService;
-        this.pictureService = pictureService;
         this.modelMapper = modelMapper;
+        this.reservationService = reservationService;
     }
 
     @GetMapping("my-places")
@@ -120,5 +116,33 @@ public class RestaurantController {
         restaurantService.update(restaurantUpdateServiceModel);
         return "redirect:/restaurant/details/" + updateId;
     }
+    @GetMapping("/check-by-date/{restaurantId}")
+    public String checkByDate(@PathVariable Long restaurantId, Model model){
+        model.addAttribute("currentId", restaurantId);
+        return "check-by-dates";
+    }
+    @PostMapping("/check-by-date/{restaurantId}")
+    public String checkByDate(@PathVariable Long restaurantId, @Valid CheckByDateBidingModel checkByDateBidingModel,
+                              BindingResult bindingResult, RedirectAttributes redirectAttributes){
+        if (bindingResult.hasErrors()){
+            redirectAttributes.addFlashAttribute("checkByDateBidingModel", checkByDateBidingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.checkByDateBidingModel", bindingResult);
+            return "redirect:/restaurant/check-by-date/" + restaurantId;
+        }
+
+        return "redirect:/restaurant/list-of-people-restaurant-reservation/" + restaurantId;
+    }
+    @GetMapping("/list-of-people-restaurant-reservation/{restaurantId}")
+    public String listOfPeople(@PathVariable Long restaurantId, Model model){
+        List<ListOfPeopleViewModel> listOfPeopleViewModels = reservationService.loadListOfPeople(restaurantId);
+        model.addAttribute("listOfPeopleViewModels", listOfPeopleViewModels);
+        return "list-of-people";
+    }
+
+    @ModelAttribute
+    public CheckByDateBidingModel checkByDateBidingModel(){
+        return new CheckByDateBidingModel();
+    }
+
 
 }

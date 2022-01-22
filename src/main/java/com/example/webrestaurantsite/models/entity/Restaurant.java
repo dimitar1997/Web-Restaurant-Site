@@ -16,7 +16,6 @@ public class Restaurant extends BasicEntity {
     private String address;
     private User owner;
     private int capacity;
-    private int leftCapacity;
     private Town city;
 
     private List<Reservation> reservations;
@@ -32,14 +31,6 @@ public class Restaurant extends BasicEntity {
         return this;
     }
 
-    public int getLeftCapacity() {
-        return leftCapacity;
-    }
-
-    public Restaurant setLeftCapacity(int leftCapacity) {
-        this.leftCapacity = leftCapacity;
-        return this;
-    }
 
     @ManyToOne(fetch = FetchType.EAGER)
     @NotNull
