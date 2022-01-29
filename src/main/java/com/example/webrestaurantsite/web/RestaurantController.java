@@ -5,8 +5,10 @@ import com.example.webrestaurantsite.models.service.RestaurantUpdateServiceModel
 import com.example.webrestaurantsite.models.view.ListOfPeopleViewModel;
 import com.example.webrestaurantsite.models.view.RestaurantArticleViewModel;
 import com.example.webrestaurantsite.models.view.RestaurantViewDetailsModel;
+import com.example.webrestaurantsite.models.view.StatsView;
 import com.example.webrestaurantsite.service.ReservationService;
 import com.example.webrestaurantsite.service.RestaurantService;
+import com.example.webrestaurantsite.service.StatService;
 import com.example.webrestaurantsite.service.TownService;
 import com.example.webrestaurantsite.service.impl.UserDetailsImpl;
 import org.modelmapper.ModelMapper;
@@ -29,12 +31,14 @@ public class RestaurantController {
     private final TownService townService;
     private final ModelMapper modelMapper;
     private final ReservationService reservationService;
+    private final StatService statService;
 
-    public RestaurantController(RestaurantService restaurantService, TownService townService, ModelMapper modelMapper, ReservationService reservationService) {
+    public RestaurantController(RestaurantService restaurantService, TownService townService, ModelMapper modelMapper, ReservationService reservationService, StatService statService) {
         this.restaurantService = restaurantService;
         this.townService = townService;
         this.modelMapper = modelMapper;
         this.reservationService = reservationService;
+        this.statService = statService;
     }
 
     @GetMapping("my-places")
@@ -48,10 +52,13 @@ public class RestaurantController {
     @GetMapping("/details/{restaurantId}")
     public String detailsRestaurant(@PathVariable Long restaurantId,
                                     Model model, @AuthenticationPrincipal UserDetailsImpl currentUser, ReserveBidingModel reserveBidingModel) {
+        statService.clear();
+        statService.onRequest(restaurantId);
         RestaurantViewDetailsModel restaurantViewDetailsModel = restaurantService.details(restaurantId);
         model.addAttribute("isOwner", restaurantService.isOwner(currentUser.getUsername(), restaurantId));
         model.addAttribute("restaurantViewDetailsModel", restaurantViewDetailsModel);
         model.addAttribute("reserveBidingModel", reserveBidingModel);
+        model.addAttribute("detailsEntries", statService.getStats());
 
         return "restaurant-details";
     }
@@ -116,15 +123,17 @@ public class RestaurantController {
         restaurantService.update(restaurantUpdateServiceModel);
         return "redirect:/restaurant/details/" + updateId;
     }
+
     @GetMapping("/check-by-date/{restaurantId}")
-    public String checkByDate(@PathVariable Long restaurantId, Model model){
+    public String checkByDate(@PathVariable Long restaurantId, Model model) {
         model.addAttribute("currentId", restaurantId);
         return "check-by-dates";
     }
+
     @PostMapping("/check-by-date/{restaurantId}")
     public String checkByDate(@PathVariable Long restaurantId, @Valid CheckByDateBidingModel checkByDateBidingModel,
-                              BindingResult bindingResult, RedirectAttributes redirectAttributes){
-        if (bindingResult.hasErrors()){
+                              BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("checkByDateBidingModel", checkByDateBidingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.checkByDateBidingModel", bindingResult);
             return "redirect:/restaurant/check-by-date/" + restaurantId;
@@ -132,15 +141,16 @@ public class RestaurantController {
 
         return "redirect:/restaurant/list-of-people-restaurant-reservation/" + restaurantId;
     }
+
     @GetMapping("/list-of-people-restaurant-reservation/{restaurantId}")
-    public String listOfPeople(@PathVariable Long restaurantId, Model model){
+    public String listOfPeople(@PathVariable Long restaurantId, Model model) {
         List<ListOfPeopleViewModel> listOfPeopleViewModels = reservationService.loadListOfPeople(restaurantId);
         model.addAttribute("listOfPeopleViewModels", listOfPeopleViewModels);
         return "list-of-people";
     }
 
     @ModelAttribute
-    public CheckByDateBidingModel checkByDateBidingModel(){
+    public CheckByDateBidingModel checkByDateBidingModel() {
         return new CheckByDateBidingModel();
     }
 

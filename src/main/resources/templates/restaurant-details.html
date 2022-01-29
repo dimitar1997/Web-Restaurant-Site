@@ -23,19 +23,21 @@
                     <div class="card-text"><span th:text="|Capacity: *{capacity} |">• Capacity</span></div>
                     <div class="card-text"><span th:text="|Town: *{city}|">• City</span></div>
                     <div class="card-text"><span th:text="|Address: *{address}|">• Address</span></div>
+
                     <div class="form-group row" th:object="${reserveBidingModel}" }>
-                        <form th:action="@{/reservation/booked/{reserveId}(reserveId=*{restaurantId})}"
-                              th:method="post"
-                        th:object="${reserveBidingModel}">
-                            <label for="dateTime" class="card-text">Select a reservation date</label>
-                            <div>
-                                <input th:field="*{dateTime}" th:erorrclass="is-invalid" type="date"
-                                       id="dateTime"
-                                       name="dateTime"
-                                       aria-describedby="createdHelpInline">
-                                <small id="createdTimeHelpInline" class="invalid-feedback bg-danger text-light rounded">
-                                    Created date cannot be in the past.
-                                </small><br>
+                            <form th:action="@{/reservation/booked/{reserveId}(reserveId=*{restaurantId})}"
+                                  th:method="post"
+                                  th:object="${reserveBidingModel}">
+                                <label for="dateTime" class="card-text">Select a reservation date</label>
+                                <div>
+                                    <input th:field="*{dateTime}" th:erorrclass="is-invalid" type="date"
+                                           id="dateTime"
+                                           name="dateTime"
+                                           aria-describedby="createdHelpInline">
+                                    <small id="createdTimeHelpInline"
+                                           class="invalid-feedback bg-danger text-light rounded">
+                                        Created date cannot be in the past.
+                                    </small><br>
 
                                     <label for="peopleCount" class="card-text">People</label>
                                     <input
@@ -48,23 +50,28 @@
                                     <input type="submit" class="btn btn-link" value="Reserve"/>
 
 
-                            </div>
+                                </div>
 
-                        </form>
+                            </form>
 
-                    </div>
-                    <th:block th:if="${isOwner}">
-                        <div class="row">
-                            <a class="nav-link" th:href="@{/restaurant/update/{updateId}(updateId=*{id})}">Update</a>
                         </div>
-                        <form th:action="@{/restaurant/delete/{id}(id=*{id})}" th:method="get">
-                            <input type="submit" class="btn btn-link" value="Delete"/>
-                        </form>
-                    </th:block>
+                        <th:block th:if="${isOwner}">
+                            <div class="card-text" th:object="${detailsEntries}"><span th:text="|Entries for today: *{entries}|">• Entries per page</span></div>
+                            <div class="row">
+                                <a class="nav-link"
+                                   th:href="@{/restaurant/update/{updateId}(updateId=*{id})}">Update</a>
+                            </div>
+                            <form th:action="@{/restaurant/delete/{id}(id=*{id})}" th:method="get">
+                                <input type="submit" class="btn btn-link" value="Delete"/>
+                            </form>
+                        </th:block>
+
             </ul>
+
         </div>
 
     </div>
 </div>
+
 </body>
 </html>

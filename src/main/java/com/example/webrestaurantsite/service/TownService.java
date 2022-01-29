@@ -1,7 +1,7 @@
 package com.example.webrestaurantsite.service;
 
 
-import com.example.webrestaurantsite.models.entity.Town;
+
 import com.example.webrestaurantsite.models.view.AllTownsViewModel;
 
 import java.io.IOException;
