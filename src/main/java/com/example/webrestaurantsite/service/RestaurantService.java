@@ -3,7 +3,6 @@ package com.example.webrestaurantsite.service;
 import com.example.webrestaurantsite.models.BidingModels.AddPictureBidingModel;
 import com.example.webrestaurantsite.models.BidingModels.AddRestaurantBidingModel;
 import com.example.webrestaurantsite.models.service.RestaurantUpdateServiceModel;
-import com.example.webrestaurantsite.models.view.ListOfPeopleViewModel;
 import com.example.webrestaurantsite.models.view.RestaurantArticleViewModel;
 import com.example.webrestaurantsite.models.view.RestaurantViewDetailsModel;
 import com.example.webrestaurantsite.service.impl.UserDetailsImpl;
@@ -25,5 +24,5 @@ public interface RestaurantService {
     boolean isOwner(String userName, Long id);
 
 
-
+    List<RestaurantArticleViewModel> findAllRestuarantsByTown(String townName);
 }

@@ -106,7 +106,7 @@ public class RestaurantController {
         return "update";
     }
 
-    @PatchMapping("/update/{updateId}")
+    @PostMapping("/update/{updateId}")
     public String updateRestaurant(@PathVariable Long updateId, @Valid RestaurantUpdateBidingModel restaurantUpdateBidingModel,
                                    BindingResult bindingResult,
                                    RedirectAttributes redirectAttributes) {
@@ -147,6 +147,24 @@ public class RestaurantController {
         List<ListOfPeopleViewModel> listOfPeopleViewModels = reservationService.loadListOfPeople(restaurantId);
         model.addAttribute("listOfPeopleViewModels", listOfPeopleViewModels);
         return "list-of-people";
+    }
+    @PostMapping("/restaurants-by-town")
+    public String restaurantByTownSearch(@Valid SearchByTownName searchByTownName, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("searchByTownName", searchByTownName)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.searchByTownName", bindingResult)
+                    .addFlashAttribute("allTowns", townService.getAllTowns());
+        }
+        model.addAttribute("restaurantArticleViewModels", restaurantService.findAllRestuarantsByTown(searchByTownName.getCity()));
+
+
+        return "find-by-town";
+    }
+
+    @ModelAttribute
+    public SearchByTownName searchByTownName() {
+        return new SearchByTownName();
     }
 
     @ModelAttribute

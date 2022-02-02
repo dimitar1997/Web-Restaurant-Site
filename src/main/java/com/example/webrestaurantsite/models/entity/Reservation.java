@@ -2,6 +2,7 @@ package com.example.webrestaurantsite.models.entity;
 
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.FutureOrPresent;
@@ -18,7 +19,8 @@ public class Reservation extends BasicEntity {
     private Restaurant restaurant;
     private int peopleCount;
 
-    @ManyToOne
+    @ManyToOne()
+    @JoinColumn(name = "user_id")
     public User getUser() {
         return user;
     }
@@ -54,6 +56,7 @@ public class Reservation extends BasicEntity {
 
 
     @ManyToOne()
+    @JoinColumn(name = "restaurant_id")
     public Restaurant getRestaurant() {
         return restaurant;
     }

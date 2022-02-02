@@ -4,6 +4,12 @@
 <head th:replace="/fragments/head::head"></head>
 <header th:replace="/fragments/navbar::header"></header>
 <body>
-
+<div th:each="r : ${restaurantArticleViewModels}" th:object="${r}" class="all-classes-container style-photo">
+    <article >
+        <img  class="photoView" th:src="*{imageUrl}" >
+        <p th:text="*{name}"></p>
+        <a  th:href="@{/restaurant/details/{restaurantId}(restaurantId=*{id})}">Details</a>
+    </article>
+</div>
 </body>
 </html>

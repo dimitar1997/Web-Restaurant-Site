@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -125,6 +126,23 @@ public class RestaurantServiceImpl implements RestaurantService {
         User user = userRepository.findByUsername(userName);
         Restaurant restaurant = restaurantRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Restaurant not found!"));
         return user.getUsername().equals(restaurant.getOwner().getUsername());
+    }
+
+    @Override
+    public List<RestaurantArticleViewModel> findAllRestuarantsByTown(String townName) {
+        Town town = townRepository.findByCity(townName);
+        List<Restaurant> restaurants = restaurantRepository.findAllByCity(town);
+        List<RestaurantArticleViewModel> restaurantArticleViewModels = new LinkedList<>();
+
+        for (Restaurant r : restaurants) {
+            RestaurantArticleViewModel rc = new RestaurantArticleViewModel();
+            Picture picture = pictureRepository.findByRestaurantId(r.getId());
+            rc.setId(r.getId());
+            rc.setName(r.getName());
+            rc.setImageUrl(picture.getImageUrl());
+            restaurantArticleViewModels.add(rc);
+        }
+        return restaurantArticleViewModels;
     }
 
 }

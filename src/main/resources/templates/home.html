@@ -1,24 +1,42 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/fragments/head::head"></head>
+<head th:replace="/fragments/head::head">
+
+    <!--    <script src="myscripts.js"></script>-->
+</head>
 <header th:replace="/fragments/navbar::header"></header>
 <body>
-<div class="section-home" >
-        <label for="city" class="register-font">Cities</label><br>
-        <p class="mandatory-field-role"> Изберете град в който ще търсите за резервация.</p><br>
-        <select th:erorrclass="is-invalid" id="city" name="city"
-                aria-describedby="categoryHelpInline">
-            <option value="" selected>All cities</option>
-            <option th:each="c : ${allTowns}"
-                    th:value="${c}" th:text="${c.getCity()}">
-            </option>
-        </select>
-        <small  id="categoryHelpInline" class="invalid-feedback bg-danger text-light rounded">
-            Трябва да изберете град.
-        </small>
+<div>
+    <form th:action="@{/restaurant/restaurants-by-town}" th:method="post" th:object="${searchByTownName}">
+            <div class="section-home">
+                <p class="mandatory-field-role"> Изберете град в който ще търсите за резервация.</p><br>
+                <div class="section">
+                    <label for="city" class="register-font">Cities</label><br>
+                    <select th:field="*{city}" th:erorrclass="is-invalid" id="city" name="city"
+                            aria-describedby="categoryHelpInline">
+                        <option value="" selected>All cities</option>
+                        <option th:each="c : ${allTowns}"
+                                th:value="${c.city}" th:text="${c.city}">
+                        </option>
+
+                    </select>
+                    <small id="categoryHelpInline" class="invalid-feedback bg-danger text-light rounded">
+                        Трябва да изберете град отговарящ на вашето заведение.
+                    </small>
+                </div>
+                <div class="center-down-search">
+                    <button class="index-button-register">
+                        <input type="submit" class="register-submit-button" value="Search">
+                    </button>
+                </div>
+                </select>
+
+            </div>
+    </form>
 
 
 </div>
+
 </body>
 </html>
