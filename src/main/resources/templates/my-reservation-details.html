@@ -19,7 +19,7 @@
           <div class="card-text"><span th:text="|Здравейте *{firstName} *{lastName}, вие имате резервация  в *{getNameRestaurant()} за *{peopleCount} на *{date}|"> Description</span></div>
 
       </ul>
-      <form th:action="@{/reservation/cancel/{reservationId}(reservationId=*{id})}" th:method="post">
+      <form th:action="@{/reservation/cancel/{reservationId}(reservationId=*{id})}" th:method="delete">
         <input type="submit" class="btn btn-link" value="Cancel"/>
       </form>
     </div>

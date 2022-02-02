@@ -1,11 +1,9 @@
 package com.example.webrestaurantsite.web;
 
 import com.example.webrestaurantsite.models.BidingModels.ReserveBidingModel;
-import com.example.webrestaurantsite.models.entity.Reservation;
 import com.example.webrestaurantsite.models.view.ReservationCustomViewModel;
 import com.example.webrestaurantsite.models.view.ReservationViewDetailsModel;
 import com.example.webrestaurantsite.service.ReservationService;
-import com.example.webrestaurantsite.service.RestaurantService;
 import com.example.webrestaurantsite.service.impl.UserDetailsImpl;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -21,11 +19,11 @@ import java.util.List;
 @RequestMapping("/reservation")
 public class ReservationController {
     private final ReservationService reservationService;
-    private final RestaurantService restaurantService;
 
-    public ReservationController(ReservationService reservationService, RestaurantService restaurantService) {
+
+    public ReservationController(ReservationService reservationService) {
         this.reservationService = reservationService;
-        this.restaurantService = restaurantService;
+
     }
 
     @GetMapping("/my-reservations")
@@ -62,7 +60,7 @@ public class ReservationController {
 
         return "my-reservation-details";
     }
-    @PostMapping("/cancel/{reservationId}")
+    @DeleteMapping("/cancel/{reservationId}")
     public String cancelReservation(@PathVariable Long reservationId){
         reservationService.cancelReservation(reservationId);
         return "redirect:/reservation/my-reservations";

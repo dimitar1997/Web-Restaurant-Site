@@ -106,7 +106,7 @@ public class RestaurantController {
         return "update";
     }
 
-    @PostMapping("/update/{updateId}")
+    @PatchMapping("/update/{updateId}")
     public String updateRestaurant(@PathVariable Long updateId, @Valid RestaurantUpdateBidingModel restaurantUpdateBidingModel,
                                    BindingResult bindingResult,
                                    RedirectAttributes redirectAttributes) {

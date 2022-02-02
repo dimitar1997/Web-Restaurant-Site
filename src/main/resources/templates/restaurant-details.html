@@ -59,7 +59,7 @@
                             <div class="card-text" th:object="${detailsEntries}"><span th:text="|Entries for today: *{entries}|">• Entries per page</span></div>
                             <div class="row">
                                 <a class="nav-link"
-                                   th:href="@{/restaurant/update/{updateId}(updateId=*{id})}">Update</a>
+                                   th:href="@{/restaurant/update/{updateId}(updateId=*{id})}" th:method="patch">Update</a>
                             </div>
                             <form th:action="@{/restaurant/delete/{id}(id=*{id})}" th:method="delete">
                                 <input type="submit" class="btn btn-link" value="Delete"/>
