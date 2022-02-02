@@ -5,7 +5,6 @@ import com.example.webrestaurantsite.models.service.RestaurantUpdateServiceModel
 import com.example.webrestaurantsite.models.view.ListOfPeopleViewModel;
 import com.example.webrestaurantsite.models.view.RestaurantArticleViewModel;
 import com.example.webrestaurantsite.models.view.RestaurantViewDetailsModel;
-import com.example.webrestaurantsite.models.view.StatsView;
 import com.example.webrestaurantsite.service.ReservationService;
 import com.example.webrestaurantsite.service.RestaurantService;
 import com.example.webrestaurantsite.service.StatService;
@@ -22,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -90,9 +90,9 @@ public class RestaurantController {
         return "redirect:/";
     }
 
-    @GetMapping("/delete/{id}")
     @PreAuthorize("@restaurantServiceImpl.isOwner(#principal.name, #id)")
-    public String deleteRestaurant(@PathVariable Long id) {
+    @DeleteMapping("/delete/{id}")
+    public String deleteRestaurant(@PathVariable Long id, Principal principal) {
         restaurantService.delete(id);
         return "redirect:/";
     }

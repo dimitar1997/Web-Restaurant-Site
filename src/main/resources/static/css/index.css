@@ -75,7 +75,10 @@ body > .header {
     text-decoration: none;
     font-family: monospace !IMPORTANT;
 }
+.login-button{
+    background-color: bisque;
 
+}
 .blur {
     border: 1px solid blue;
     filter: blur(23px);
@@ -345,6 +348,21 @@ select {
     background-color: rgba(15, 71, 22, 0.43);
     border: 1px solid rgba(0, 0, 0, .125);
 }
+/*------------------------------------------*/
+.reservations-caption{
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    color: #ffffff;
+    caption-side: top;
+    text-align: center;
+}
+.b1{
+    color: white;
+    text-align: center;
+text-decoration-width: auto;
+}
+
+
 
 
 

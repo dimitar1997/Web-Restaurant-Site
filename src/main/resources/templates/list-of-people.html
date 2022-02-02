@@ -3,14 +3,33 @@
       xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/fragments/head::head"></head>
 <header th:replace="/fragments/navbar::header"></header>
-<body >
-<ol th:each="all : ${listOfPeopleViewModels}">
-    <div >
-        <li>
-            <span th:text="|*{all.fullName} резервира за *{all.peopleCount} човека.|"> Description</span>
-        </li>
+<style>
+    table, th, td {
+        border: 2px solid #ffffff;
+    }
+</style>
+<body>
+<h1 class="b1">Резервации</h1>
 
-    </div>
-</ol>
+<table>
+    <caption class="reservations-caption">Резервации за деня</caption>
+    <tr>
+        <th class="b1">Full name</th>
+        <th class="b1">People count</th>
+    </tr>
+    <tr th:each="all : ${listOfPeopleViewModels}">
+        <td class="b1" th:text="*{all.fullName}">January</td>
+        <td class="b1" th:text="*{all.peopleCount}">$100</td>
+    </tr>
+</table>
+<!--<ol >-->
+<!--    -->
+<!--&lt;!&ndash;    <div >&ndash;&gt;-->
+<!--&lt;!&ndash;        <li>&ndash;&gt;-->
+<!--&lt;!&ndash;            <span th:text="|*{all.fullName} резервира за *{all.peopleCount} човека.|"> Description</span>&ndash;&gt;-->
+<!--&lt;!&ndash;        </li>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--</ol>-->
 </body>
 </html>

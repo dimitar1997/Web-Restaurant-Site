@@ -1,4 +1,13 @@
 spring:
+  servlet:
+    multipart:
+      max-file-size: 15MB
+      max-request-size: 15MB
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: "jdbc:mysql://localhost:3306/restaurant-reservations?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC"
@@ -8,10 +17,6 @@ spring:
     init:
       mode: always
 
-      mvc:
-        hiddenmethod:
-          filter:
-            enabled: true
 
 
   jpa:
@@ -38,7 +43,4 @@ logging:
     org.hibernate.SQL: DEBUG
 
 
-  servlet:
-    multipart:
-      max-file-size: 15MB
-      max-request-size: 15MB
+

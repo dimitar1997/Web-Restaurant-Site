@@ -17,12 +17,12 @@
 
             <ul class="offer-details list-group list-group-flush">
                 <li class="group-background">
-                    <div class="card-text"><span th:text="|Name: *{name}|">• Name</span></div>
+                    <div class="card-text"><span th:text="|Name / Име: *{name}|">• Name</span></div>
 
-                    <div class="card-text"><span th:text="|Description: *{description}|"> Description</span></div>
-                    <div class="card-text"><span th:text="|Capacity: *{capacity} |">• Capacity</span></div>
-                    <div class="card-text"><span th:text="|Town: *{city}|">• City</span></div>
-                    <div class="card-text"><span th:text="|Address: *{address}|">• Address</span></div>
+                    <div class="card-text"><span th:text="|Description / Описание: *{description}|"> Description</span></div>
+                    <div class="card-text"><span th:text="|Capacity / Капацитет: *{capacity} |">• Capacity</span></div>
+                    <div class="card-text"><span th:text="|Town / Град: *{city}|">• City</span></div>
+                    <div class="card-text"><span th:text="|Address / Адрес: *{address}|">• Address</span></div>
 
                     <div class="form-group row" th:object="${reserveBidingModel}" }>
                             <form th:action="@{/reservation/booked/{reserveId}(reserveId=*{restaurantId})}"
@@ -61,7 +61,7 @@
                                 <a class="nav-link"
                                    th:href="@{/restaurant/update/{updateId}(updateId=*{id})}">Update</a>
                             </div>
-                            <form th:action="@{/restaurant/delete/{id}(id=*{id})}" th:method="get">
+                            <form th:action="@{/restaurant/delete/{id}(id=*{id})}" th:method="delete">
                                 <input type="submit" class="btn btn-link" value="Delete"/>
                             </form>
                         </th:block>
