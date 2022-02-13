@@ -6,9 +6,13 @@
 <body>
 <div th:each="all : ${allCurrentUserReservations}" th:object="${all}" class="all-classes-container style-photo">
     <article>
-        <img class="photoView" th:src="*{imgUrl}">
-        <p th:text="*{name}"></p>
-        <a class="nav-link" th:href="@{/reservation/my-reservations-details/{reservationId}(reservationId=*{id})}">Details</a>
+        <figure class="snip1574">
+            <img th:src="*{imgUrl}" alt="profile-sample2"/>
+            <blockquote>
+                <p th:text="*{name}"></p>
+            </blockquote>
+            <a th:href="@{/restaurant/details/{restaurantId}(restaurantId=*{id})}">Details</a>
+        </figure>
     </article>
 
 </div>

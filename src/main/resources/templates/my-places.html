@@ -3,15 +3,27 @@
       xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/fragments/head::head"></head>
 <header th:replace="/fragments/navbar::header"></header>
-<body >
-<div th:each="r : ${restaurantArticleViewModels}" th:object="${r}" class="all-classes-container style-photo">
-<article >
-<img  class="photoView" th:src="*{imageUrl}" >
-    <p th:text="*{name}"></p>
-    <a  th:href="@{/restaurant/details/{restaurantId}(restaurantId=*{id})}">Details</a>
-    <br>
-    <a th:href="@{/restaurant/check-by-date/{restaurantId}(restaurantId=*{id})}">Check reservations by date</a>
-</article>
+<body>
+<div th:each="r : ${restaurantArticleViewModels}" th:object="${r}">
+    <article>
+
+        <figure class="snip1574">
+            <img th:src="*{imageUrl}" alt="profile-sample2"/>
+            <blockquote>
+                <p th:text="*{name}"></p>
+            </blockquote>
+            <a th:href="@{/restaurant/details/{restaurantId}(restaurantId=*{id})}">Details</a><br>
+            <a th:href="@{/restaurant/check-by-date/{restaurantId}(restaurantId=*{id})}">Check reservations by date</a>
+
+        </figure>
+
+
+        <!--    <img  class="photoView" th:src="*{imageUrl}" >-->
+        <!--    <p th:text="*{name}"></p>-->
+        <!--    <a  th:href="@{/restaurant/details/{restaurantId}(restaurantId=*{id})}">Details</a>-->
+        <!--    <br>-->
+        <!--    <a th:href="@{/restaurant/check-by-date/{restaurantId}(restaurantId=*{id})}">Check reservations by date</a>-->
+    </article>
 
 </div>
 
