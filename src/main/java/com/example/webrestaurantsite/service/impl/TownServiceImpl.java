@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,15 +45,12 @@ public class TownServiceImpl implements TownService {
 
         SeedCitiesServiceModel[] seedCitiesServiceModels = gson.fromJson(fileContent, SeedCitiesServiceModel[].class);
 
-        Arrays.stream(seedCitiesServiceModels).map(seedCitiesServiceModel -> {
-            Town town = modelMapper.map(seedCitiesServiceModel, Town.class);
-            return town;
-        }).forEach(townRepository::save);
+        Arrays.stream(seedCitiesServiceModels).map(seedCitiesServiceModel -> modelMapper.map(seedCitiesServiceModel, Town.class)).forEach(townRepository::save);
     }
 
     @Override
     public List<AllTownsViewModel> getAllTowns() {
-        return townRepository.findAll().stream().sorted((o1, o2) -> o1.getCity().compareTo(o2.getCity())).map(town -> modelMapper.map(town, AllTownsViewModel.class))
+        return townRepository.findAll().stream().sorted(Comparator.comparing(Town::getCity)).map(town -> modelMapper.map(town, AllTownsViewModel.class))
                 .collect(Collectors.toList());
     }
 }

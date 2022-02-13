@@ -9,7 +9,6 @@ import com.example.webrestaurantsite.models.entity.User;
 import com.example.webrestaurantsite.models.service.AddPictureServiceModel;
 import com.example.webrestaurantsite.models.service.AddRestaurantServiceModel;
 import com.example.webrestaurantsite.models.service.RestaurantUpdateServiceModel;
-import com.example.webrestaurantsite.models.view.ListOfPeopleViewModel;
 import com.example.webrestaurantsite.models.view.RestaurantArticleViewModel;
 import com.example.webrestaurantsite.models.view.RestaurantViewDetailsModel;
 import com.example.webrestaurantsite.repository.PictureRepository;

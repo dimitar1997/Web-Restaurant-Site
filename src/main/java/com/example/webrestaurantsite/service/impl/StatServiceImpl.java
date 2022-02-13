@@ -9,7 +9,7 @@ import java.util.Map;
 
 @Service
 public class StatServiceImpl implements StatService {
-   private Map<Long, Long> detailsEntries = new LinkedHashMap<>();
+   private final Map<Long, Long> detailsEntries = new LinkedHashMap<>();
    private Long entries;
 
 

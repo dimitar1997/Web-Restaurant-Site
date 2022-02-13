@@ -100,10 +100,7 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public boolean isFull(LocalDate dateTime, Long restaurantId) {
         Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow(() -> new ObjectNotFoundException("Restaurant whit " + restaurantId + " not found!"));
-        if (reservationRepository.findAllByDateTime(dateTime).size() >= restaurant.getCapacity()){
-            return true;
-        }
-        return false;
+        return reservationRepository.findAllByDateTime(dateTime).size() >= restaurant.getCapacity();
     }
 
     @Override
