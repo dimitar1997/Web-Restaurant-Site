@@ -25,19 +25,14 @@ dependencies {
     implementation 'org.modelmapper:modelmapper:2.4.4'
     implementation 'org.jetbrains:annotations:20.1.0'
     runtimeOnly 'mysql:mysql-connector-java'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    // https://mvnrepository.com/artifact/com.google.code.gson/gson
     implementation 'com.google.code.gson:gson:2.7'
-    // https://mvnrepository.com/artifact/com.cloudinary/cloudinary-http44
     implementation 'com.cloudinary:cloudinary-http44:1.2.1'
-    // https://mvnrepository.com/artifact/org.springframework.security/spring-security-test
-    testImplementation 'org.springframework.security:spring-security-test:4.0.0.RELEASE'
-
-
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'org.hsqldb:hsqldb'
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
 
-//Thanks for using https://jar-download.com
 
 
 

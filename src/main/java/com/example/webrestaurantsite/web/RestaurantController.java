@@ -77,7 +77,7 @@ public class RestaurantController {
     @PostMapping("/add")
     public String errorAdd(@Valid AddRestaurantBidingModel addRestaurantBidingModel,
                            BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                           AddPictureBidingModel addPictureBidingModel,
+                           @Valid AddPictureBidingModel addPictureBidingModel,
                            @AuthenticationPrincipal UserDetailsImpl currentUser) throws IOException {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addRestaurantBidingModel", addRestaurantBidingModel)
