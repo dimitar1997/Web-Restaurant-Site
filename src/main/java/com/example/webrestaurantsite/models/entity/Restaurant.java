@@ -20,6 +20,8 @@ public class Restaurant extends BasicEntity {
 
     private List<Reservation> reservations;
 
+    public Restaurant() {
+    }
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "restaurant")
     public List<Reservation> getReservations() {

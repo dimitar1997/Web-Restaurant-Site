@@ -3,15 +3,8 @@
     "city": "Sofia"
   }, 
   {
-    "city": "Varna", 
-    "lat": "43.2114", 
-    "lng": "27.9111", 
-    "country": "Bulgaria", 
-    "iso2": "BG", 
-    "admin_name": "Varna", 
-    "capital": "admin", 
-    "population": "369162", 
-    "population_proper": "369162"
+    "city": "Varna"
+
   }, 
   {
     "city": "Plovdiv", 

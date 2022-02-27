@@ -25,8 +25,7 @@ public class Town extends BasicEntity {
         return this;
     }
 
-    @Column(nullable = false, unique = true)
-
+    @Column(nullable = false)
     public String getCity() {
         return city;
     }

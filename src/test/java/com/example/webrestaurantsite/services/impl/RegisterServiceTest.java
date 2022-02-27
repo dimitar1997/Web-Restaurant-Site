@@ -33,7 +33,6 @@ public class RegisterServiceTest {
     @BeforeEach
     void init() {
 
-        //ARRANGE
         serviceToTest = new WebRestaurantImpl(mockUserRepository);
 
 
@@ -59,14 +58,14 @@ public class RegisterServiceTest {
     @Test
     void testUserFound() {
 
-        // Arrange
+
         Mockito.when(mockUserRepository.findByUsername(testUser.getUsername())).
                 thenReturn(testUser);
 
-        // Act
+
         var actual = serviceToTest.loadUserByUsername(testUser.getUsername());
 
-        // Assert
+
 
         String expectedRoles = "ROLE_OWNER";
         String actualRoles = actual.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(

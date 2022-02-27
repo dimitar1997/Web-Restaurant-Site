@@ -2,6 +2,8 @@ package com.example.webrestaurantsite.models.service;
 
 import com.google.gson.annotations.Expose;
 
+import javax.validation.constraints.NotNull;
+
 public class SeedCitiesServiceModel {
     @Expose
     private String city;
