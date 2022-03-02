@@ -7,6 +7,7 @@ import com.example.webrestaurantsite.models.entity.User;
 import com.example.webrestaurantsite.models.entity.enums.RoleEnums;
 import com.example.webrestaurantsite.repository.PictureRepository;
 
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,7 +33,7 @@ public class PictureServiceImplTest {
     @BeforeEach
     void init() {
         testPicture = new Picture();
-        testPicture.setId(2);
+        testPicture.setId(2L);
         testPicture.setImageUrl("https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGhvdG98ZW58MHx8MHx8&w=1000&q=80");
         testPicture.setPublicId(PUBLIC_ID);
 
@@ -47,7 +48,7 @@ public class PictureServiceImplTest {
 
 
         testRestaurant = new Restaurant();
-        testRestaurant.setId(1);
+        testRestaurant.setId(1L);
         testRestaurant.setOwner(testUser);
         testRestaurant.setAddress("test-address");
         testRestaurant.setName("test");
@@ -62,10 +63,11 @@ public class PictureServiceImplTest {
 
         testPicture.setRestaurant(testRestaurant);
     }
-// not working Cannot invoke "com.example.webrestaurantsite.models.entity.Picture.getId()" because "actual" is null
+// not working
     @Test
     void testPictureFound(){
         Mockito.when(testPictureRepository.findById(2L)).thenReturn(java.util.Optional.ofNullable(testPicture));
+
 
         var actual = testPictureRepository.findByRestaurantId(testRestaurant.getId());
         Assertions.assertEquals(actual.getId(), testPicture.getId());

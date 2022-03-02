@@ -11,4 +11,5 @@ import java.util.List;
 public interface PictureRepository extends JpaRepository<Picture, Long> {
     List<Picture> findAllByRestaurantId(long restaurant_id);
     Picture findByRestaurantId(long restaurant_id);
+    Picture findByImageUrl(String imageUrl);
 }
