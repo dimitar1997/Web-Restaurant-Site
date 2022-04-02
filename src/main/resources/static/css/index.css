@@ -79,10 +79,12 @@ body > .header {
     text-decoration: none;
     font-family: monospace !IMPORTANT;
 }
-.login-button{
+
+.login-button {
     background-color: bisque;
 
 }
+
 .blur {
     border: 1px solid blue;
     filter: blur(23px);
@@ -225,11 +227,13 @@ select {
     border: none;
     background-color: #ffd600;
 }
-.center-down-search{
+
+.center-down-search {
     margin-left: 7%;
     margin-top: 10%;
 }
-.index-button-search{
+
+.index-button-search {
     border: none;
     height: 37px;
     padding-left: 70px;
@@ -337,23 +341,27 @@ select {
     background-color: rgba(15, 71, 22, 0.43);
     border: 1px solid rgba(0, 0, 0, .125);
 }
+
 /*------------------------------------------*/
-.reservations-caption{
+.reservations-caption {
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
     color: #ffffff;
     caption-side: top;
     text-align: center;
 }
-.b1{
+
+.b1 {
     color: white;
     text-align: center;
-text-decoration-width: auto;
+    text-decoration-width: auto;
 }
 
 /*-------------------------------- card css */
 
 .snip1574 {
+    float: left;
+    padding: 2px 0px;
     font-family: 'Lato', Arial, sans-serif;
     position: relative;
     display: inline-block;
@@ -417,10 +425,77 @@ text-decoration-width: auto;
 
 }
 
+/*--------------------------------------- check-by-dates page*/
+
+.check-by-dates {
+    text-align: center;
+    margin: auto;
+    width: 30%;
+    padding: 15px;
+    background-color: #fedf045e;
+}
+
+.update-button {
+    color: white;
+    padding: 85px;
+    -webkit-text-decorations-in-effect: blink;
+}
 
 
+/* CSS */
+.button-3 {
+    appearance: none;
+    background-color: #6c757d;
+    border: 1px solid rgba(27, 31, 35, .15);
+    border-radius: 6px;
+    box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    padding: 4px 16px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
+    height: 33px;
+    top: 80px;
+    left: 97px;
+}
 
+.button-3:focus:not(:focus-visible):not(.focus-visible) {
+    box-shadow: none;
+    outline: none;
+}
 
+.button-3:hover {
+    background-color: rgba(123, 95, 42, 0.68);
+}
+
+.button-3:focus {
+    box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
+    outline: none;
+}
+
+.button-3:disabled {
+    background-color: #94d3a2;
+    border-color: rgba(27, 31, 35, .1);
+    color: rgba(255, 255, 255, .8);
+    cursor: default;
+}
+
+.button-3:active {
+    background-color: rgba(142, 97, 41, 0.82);
+    box-shadow: rgba(70, 46, 20, 0.2) 0 1px 0 inset;
+}
 
 
 

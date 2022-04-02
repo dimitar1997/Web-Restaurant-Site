@@ -39,7 +39,7 @@
                                         Created date cannot be in the past.
                                     </small><br>
 
-                                    <label for="peopleCount" class="card-text">People</label>
+                                    <label for="peopleCount" class="card-text">People</label><br>
                                     <input
                                             th:field="*{peopleCount}"
                                             class="field-capacity"
@@ -47,24 +47,24 @@
                                             name="peopleCount"
                                             type="number"
                                             placeholder="Capacity">
-                                    <input type="submit" class="btn btn-link" value="Reserve"/>
+                                    <input type="submit" value="Reserve"/>
 
 
-                                </div>
+                                </div><br>
 
                             </form>
 
                         </div>
                         <th:block th:if="${isOwner}">
-                            <div class="card-text" th:object="${detailsEntries}"><span th:text="|Entries for today: *{entries}|">• Entries per page</span></div>
                             <div class="row">
-                                <a class="nav-link"
+                                <a class="button-3"
                                    th:href="@{/restaurant/update/{updateId}(updateId=*{id})}">Update</a>
                             </div>
                             <form th:action="@{/restaurant/delete/{id}(id=*{id})}" th:method="delete">
-                                <input type="submit" class="btn btn-link" value="Delete"/>
+                                <input type="submit" value="Delete"/>
                             </form>
                         </th:block>
+                    <div class="card-text" th:object="${detailsEntries}"><span th:text="|Entries for today: *{entries}|">• Entries per page</span></div>
 
             </ul>
 
