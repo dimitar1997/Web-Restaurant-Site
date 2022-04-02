@@ -16,7 +16,7 @@
 
       <ul class="offer-details list-group list-group-flush">
         <li class="group-background">
-          <div class="card-text"><span th:text="|Здравейте *{firstName} *{lastName}, вие имате резервация  в *{getNameRestaurant()} за *{peopleCount} на *{date}|"> Description</span></div>
+          <div class="card-text"><span th:text="|Здравейте *{firstName} *{lastName}, вие имате резервация  в *{getNameRestaurant()} за *{peopleCount} човека на *{date}!|"> Description</span></div>
 
       </ul>
       <form th:action="@{/reservation/cancel/{reservationId}(reservationId=*{id})}" th:method="delete">

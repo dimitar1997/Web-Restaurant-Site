@@ -63,8 +63,9 @@
                             <form th:action="@{/restaurant/delete/{id}(id=*{id})}" th:method="delete">
                                 <input type="submit" value="Delete"/>
                             </form>
+                            <div class="card-text" th:object="${detailsEntries}"><span th:text="|Entries for today: *{entries}|">• Entries per page</span></div>
                         </th:block>
-                    <div class="card-text" th:object="${detailsEntries}"><span th:text="|Entries for today: *{entries}|">• Entries per page</span></div>
+
 
             </ul>
 

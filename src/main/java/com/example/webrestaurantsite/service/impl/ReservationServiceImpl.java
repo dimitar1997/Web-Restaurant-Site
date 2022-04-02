@@ -40,6 +40,7 @@ public class ReservationServiceImpl implements ReservationService {
         this.pictureRepository = pictureRepository;
     }
 
+
     @Override
     public Reservation details(Long id) {
         return reservationRepository.getById(id);
@@ -64,7 +65,7 @@ public class ReservationServiceImpl implements ReservationService {
         User user = userRepository.findByUsername(currentUser.getUsername());
         List<Reservation> reservations = reservationRepository.findAllByUserOrderByDateTimeAsc(user);
         List<ReservationCustomViewModel> rvdm = new LinkedList<>();
-        for (Reservation r:reservations) {
+        for (Reservation r : reservations) {
             ReservationCustomViewModel rModel = new ReservationCustomViewModel();
             rModel.setId(r.getId());
             Picture picture = pictureRepository.findByRestaurantId(r.getRestaurant().getId());
@@ -94,6 +95,7 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public void cancelReservation(Long reservationId) {
         Reservation reservation = reservationRepository.findById(reservationId).orElseThrow(() -> new ObjectNotFoundException("Reservation whit " + reservationId + " not found!"));
+
         reservationRepository.delete(reservation);
     }
 
@@ -106,11 +108,11 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public List<ListOfPeopleViewModel> loadListOfPeople(Long restaurantId) {
         Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow(() -> new ObjectNotFoundException("Restaurant whit " + restaurantId + " not found!"));
-       List<Reservation> reservations = reservationRepository.findAllByRestaurant(restaurant);
+        List<Reservation> reservations = reservationRepository.findAllByRestaurant(restaurant);
 
-       List<ListOfPeopleViewModel> listOfPeopleViewModels = new ArrayList<>();
+        List<ListOfPeopleViewModel> listOfPeopleViewModels = new ArrayList<>();
 
-        for (Reservation r: reservations) {
+        for (Reservation r : reservations) {
             ListOfPeopleViewModel listOfPeopleViewModel = new ListOfPeopleViewModel();
             listOfPeopleViewModel.setFullName(r.getUser().getFirstName() + " " + r.getUser().getLastName());
             listOfPeopleViewModel.setPeopleCount(r.getPeopleCount());

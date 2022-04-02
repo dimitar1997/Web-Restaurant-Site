@@ -144,7 +144,9 @@ public class RestaurantController {
 
     @GetMapping("/list-of-people-restaurant-reservation/{restaurantId}")
     public String listOfPeople(@PathVariable Long restaurantId, Model model) {
+
         List<ListOfPeopleViewModel> listOfPeopleViewModels = reservationService.loadListOfPeople(restaurantId);
+
         model.addAttribute("listOfPeopleViewModels", listOfPeopleViewModels);
         return "list-of-people";
     }
