@@ -4,15 +4,20 @@
 <head th:replace="/fragments/head::head"></head>
 <header th:replace="/fragments/navbar::header"></header>
 <style>
+
     table, th, td {
+        margin: auto;
+        width: 60%;
         border: 2px solid #ffffff;
+        padding: 10px;
+
     }
 </style>
 <body>
 <h1 class="b1">Резервации</h1>
 
-<table>
-    <caption class="reservations-caption">Резервации за деня</caption>
+<table >
+    <caption class="reservations-caption"><span th:text="|Резервации за деня ${sumCountForDate}.|"> Description</span></caption>
     <tr>
         <th class="b1">Full name</th>
         <th class="b1">People count</th>

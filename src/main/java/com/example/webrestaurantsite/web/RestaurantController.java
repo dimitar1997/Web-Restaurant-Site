@@ -146,10 +146,15 @@ public class RestaurantController {
     public String listOfPeople(@PathVariable Long restaurantId, Model model) {
 
         List<ListOfPeopleViewModel> listOfPeopleViewModels = reservationService.loadListOfPeople(restaurantId);
-
+        int sum = 0;
+        for (ListOfPeopleViewModel listOfPeopleViewModel : listOfPeopleViewModels) {
+            sum = sum + listOfPeopleViewModel.getPeopleCount();
+        }
+        model.addAttribute("sumCountForDate", sum);
         model.addAttribute("listOfPeopleViewModels", listOfPeopleViewModels);
         return "list-of-people";
     }
+
     @PostMapping("/restaurants-by-town")
     public String restaurantByTownSearch(@Valid SearchByTownName searchByTownName, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
 

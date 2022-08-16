@@ -102,7 +102,17 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public boolean isFull(LocalDate dateTime, Long restaurantId) {
         Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow(() -> new ObjectNotFoundException("Restaurant whit " + restaurantId + " not found!"));
-        return reservationRepository.findAllByDateTime(dateTime).size() >= restaurant.getCapacity();
+       List<Reservation> reservations =  reservationRepository.findAllByDateTime(dateTime);
+       int currentCapacity = 0;
+        for (Reservation rs : reservations) {
+            currentCapacity = currentCapacity + rs.getPeopleCount();
+        }
+        if(currentCapacity >= restaurant.getCapacity()){
+           return false;
+        }else {
+            return true;
+        }
+
     }
 
     @Override
@@ -117,6 +127,7 @@ public class ReservationServiceImpl implements ReservationService {
             listOfPeopleViewModel.setFullName(r.getUser().getFirstName() + " " + r.getUser().getLastName());
             listOfPeopleViewModel.setPeopleCount(r.getPeopleCount());
             listOfPeopleViewModels.add(listOfPeopleViewModel);
+
         }
         return listOfPeopleViewModels;
     }

@@ -47,6 +47,9 @@
                                             name="peopleCount"
                                             type="number"
                                             placeholder="Capacity">
+                                    <p th:if="${isFull}" class="errors alert alert-danger">
+                                        Заведението е пълно за тази дата.
+                                    </p>
                                     <input type="submit" value="Reserve"/>
 
 
